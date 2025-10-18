@@ -1,3 +1,4 @@
+/*
 'use client'
 import "../resources/styling/writing.css"
 import { Chess } from "chess.js"
@@ -61,3 +62,4 @@ export default function MinimalChessboard() {
             </div>
         </div>
     )}
+ */

@@ -1,4 +1,4 @@
-// app/components/PGNReplay.tsx
+/*
 'use client'
 import { useState } from 'react'
 import { Chess } from 'chess.js'
@@ -62,7 +62,6 @@ export default function PGNReplay() {
         <div className="flex flex-col gap-6 p-4 max-w-6xl mx-auto">
             <h1 className="text-2xl font-bold">PGN Replay</h1>
 
-            {/* PGN Import */}
             <div className="bg-gray-100 p-4 rounded-lg">
                 <label className="block text-sm font-medium mb-2">PGN eingeben:</label>
                 <textarea
@@ -79,10 +78,7 @@ export default function PGNReplay() {
                     PGN laden
                 </button>
             </div>
-
-            {/* Brett und Controls */}
             <div className="flex flex-col lg:flex-row gap-6">
-                {/* Schachbrett */}
                 <div className="flex-1">
                     <div className="max-w-md mx-auto">
                         <Chessboard
@@ -92,8 +88,6 @@ export default function PGNReplay() {
                             } as any}
                         />
                     </div>
-
-                    {/* Navigation Controls */}
                     <div className="mt-4 flex items-center justify-center gap-2">
                         <button
                             onClick={first}
@@ -128,8 +122,6 @@ export default function PGNReplay() {
                         </button>
                     </div>
                 </div>
-
-                {/* Zughistorie */}
                 <div className="flex-1 max-w-md">
                     <h2 className="font-bold mb-2">Züge:</h2>
                     <div className="bg-gray-50 p-3 rounded max-h-96 overflow-y-auto">
@@ -156,16 +148,12 @@ export default function PGNReplay() {
                             )
                         })}
                     </div>
-
-                    {/* PGN Anzeige */}
                     <h2 className="font-bold mb-2 mt-4">Komplette PGN:</h2>
                     <pre className="text-xs bg-gray-50 p-3 rounded max-h-48 overflow-auto">
                         {game.pgn()}
                     </pre>
                 </div>
             </div>
-
-            {/* Beispiel PGN */}
             <div className="bg-blue-50 p-4 rounded-lg">
                 <p className="font-semibold mb-2">Beispiel-PGN zum Testen:</p>
                 <code className="text-sm block bg-white p-2 rounded">
@@ -175,3 +163,4 @@ export default function PGNReplay() {
         </div>
     )
 }
+*/

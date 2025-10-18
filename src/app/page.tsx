@@ -1,11 +1,11 @@
 import "./globals.css";
-import MinimalChessboard from "./components/chessboard";
+//import MinimalChessboard from "./components/chessboard";
 
 export default function Home() {
   return (
     <div>
       <main className="w-full">
-          <MinimalChessboard/>
+          <p>Test</p>
       </main>
     </div>
   );
