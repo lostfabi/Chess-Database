@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.75.1",
     "chess.js": "^1.4.0",
     "next": "15.5.4",
     "react": "19.1.0",
