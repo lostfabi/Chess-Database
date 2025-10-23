@@ -1,13 +1,11 @@
 import "./globals.css";
-import TestPage from "@/app/components/fetchTest";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div>
-      <main className="w-full">
-          <p>Test</p>
-          <TestPage></TestPage>
-      </main>
+        <h1>Wellcome!</h1>
+        <Link href="/auth/login">login</Link>
     </div>
   );
 }

@@ -1,5 +1,5 @@
-/*
 'use client'
+
 import { useState } from 'react'
 import { Chess } from 'chess.js'
 import Chessboard from './ChessboardWrapper'
@@ -163,4 +163,3 @@ export default function PGNReplay() {
         </div>
     )
 }
-*/
