@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack:  {
+      root: "C:\\Users\\fabia\\Desktop\\Informatik\\Projekte\\chess\\untitled"
+  }
 };
 
 export default nextConfig;

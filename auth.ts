@@ -6,7 +6,12 @@ import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require'})
+const sql = postgres(process.env.POSTGRES_URL!, {
+    ssl: 'require',
+    max: 10,
+    idle_timeout: 20,
+    prepare: false
+})
 
 async function getUser(email: string): Promise<User | undefined> {
     try {
@@ -34,7 +39,7 @@ export const { auth, signIn, signOut } = NextAuth({
                 const passwordsMatch = await bcrypt.compare(password, user.password)
 
                 if(passwordsMatch) return {
-                    id: user.id,
+                    id: String(user.id),
                     email: user.email,
                     name: user.username
                 }

@@ -1,7 +1,10 @@
-import {getLatestUserTournaments} from "@/app/lib/actions";
+import {getLatestTournaments} from "@/app/lib/actions";
+import TournamentCard from "@/app/components/Dashboard/Tournaments/TournamentCard";
+import {getOngoingTournaments} from "@/app/lib/helperFunctions";
 
 export default async function TournamentsList() {
-    const tournaments = await getLatestUserTournaments()
+    const tournaments = await  getLatestTournaments()
+    const ongoingTournaments = getOngoingTournaments(tournaments)
 
     if(!tournaments || tournaments.length === 0) {
         return <p>No Tournaments</p>
@@ -9,9 +12,9 @@ export default async function TournamentsList() {
 
     return (
         <ul>
-            {tournaments.map(t => (
-                <li key={t.id} className="p-3">
-                    {t.name}
+            {ongoingTournaments.map(t => (
+                <li key={t.id} className="pb-4">
+                    <TournamentCard key={t.id} tournament={t} />
                 </li>
             ))}
         </ul>

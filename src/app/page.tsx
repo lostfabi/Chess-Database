@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div>
+    <div className="h-screen">
         <h1>Wellcome!</h1>
         <Link href="/auth/login">login</Link>
     </div>

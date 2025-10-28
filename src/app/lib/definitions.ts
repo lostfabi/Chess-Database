@@ -27,18 +27,12 @@ export type Game = {
     date: Date;
 };
 
-export type TournamentState = 'upcoming' | 'ongoing' | 'completed'
-
-export function getTournamentState(tournament: Tournament): TournamentState {
-    const now = new Date();
-    const start = new Date(tournament.startDate);
-    const end = tournament.endDate ? new Date(tournament.endDate) : null;
-
-    if (start > now) {
-        return 'upcoming';
-    } else if ((end && now >= start && now <= end) || (!end && start <= now)) {
-        return 'ongoing';
-    } else {
-        return 'completed';
-    }
+export type Move = {
+    move: string;
+    white: string;
+    black?: string;
 }
+
+export type MoveArray = Move[]
+
+export type TournamentState = 'upcoming' | 'ongoing' | 'completed'
