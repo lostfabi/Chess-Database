@@ -13,11 +13,6 @@ export default function () {
                     Games
                 </Link>
             </div>
-            <div className="bg-light-primary/50 dark:bg-dark-primary/50 hover:bg-light-primary/80 dark:hover:bg-dark-primary/80 p-3 rounded-md">
-                <Link className="" href={"/dashboard/Clubs"}>
-                    Clubs
-                </Link>
-            </div>
         </div>
     )
 }

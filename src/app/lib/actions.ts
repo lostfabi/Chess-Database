@@ -4,7 +4,7 @@ import { auth, signIn } from "../../../auth";
 import { AuthError } from 'next-auth';
 import type { Game, Tournament, User } from '@/app/lib/definitions';
 import bcrypt from "bcrypt";
-import { createTournamentScheme, registerScheme } from "@/app/lib/formValidation";
+import { createTournamentScheme, registerScheme, createGameScheme } from "@/app/lib/formValidation";
 import { supabase } from '@/app/lib/db';
 
 export async function authenticate(
@@ -77,6 +77,20 @@ export async function getTournamentById(id: number): Promise<Tournament> {
         throw new Error(`Tournament ${id} not found`)
     }
 
+    return data as Tournament
+}
+
+export async function getTournamentByName(name: string): Promise<Tournament> {
+    const { data, error } = await supabase
+        .from('Tournament')
+        .select('id')
+        .eq('name', name)
+        .single()
+
+    if (error) {
+        console.error('Error fetching tournament:', error)
+        throw new Error(`Tournament ${name} not found`)
+    }
     return data as Tournament
 }
 
@@ -224,6 +238,51 @@ export async function createTournament(formData: FormData) {
 
     if (error) {
         console.error('Tournament creation error:', error)
+        return { error: 'post operation failed' }
+    }
+
+    return { success: true }
+}
+
+export async function createGame(formData: FormData) {
+    const tournamentName = formData.get('tournament') as string
+    if(!tournamentName) return { error: 'no tournament name found' }
+
+    const tournament = await getTournamentByName(tournamentName)
+    if (!tournament) return { error: 'tournament not found' };
+
+    const validated = createGameScheme.safeParse({
+        playerWhite: formData.get('playerWhite'),
+        playerBlack: formData.get('playerBlack'),
+        date: formData.get('date'),
+        pgn: formData.get('pgn'),
+        result: formData.get('result'),
+        tournamentId: tournament.id
+    })
+
+    const userId = await getSession()
+    if(!userId) return { error: "no user" }
+
+    if (!validated.success) {
+        console.error('Validation error:', validated.error)
+        return { error: "validation error" }
+    }
+
+    const { tournamentId, result, pgn, date, playerWhite, playerBlack } = validated.data
+
+    const { error } = await supabase
+        .from('Game')
+        .insert({
+            tournamentId,
+            result,
+            pgn,
+            date,
+            playerWhite,
+            playerBlack,
+        })
+
+    if (error) {
+        console.error('Game creation error:', error)
         return { error: 'post operation failed' }
     }
 

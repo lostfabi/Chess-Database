@@ -25,11 +25,12 @@ export const createTournamentScheme = z.object({
 })
 
 export const createGameScheme = z.object({
-    tournamentId: z.number().positive(),
+    tournamentId: z.number,
     playerWhite: z.string().min(1, 'player required'),
     playerBlack: z.string().min(1, 'player required'),
     pgn: z.string().min(10, 'invalid pgn'),
-    date: z.string().refine(date => !isNaN(Date.parse(date)), 'invalid date')
+    date: z.string().refine(date => !isNaN(Date.parse(date)), 'invalid date'),
+    result: z.string()
 })
 
 export type LoginInput = z.infer<typeof loginScheme>

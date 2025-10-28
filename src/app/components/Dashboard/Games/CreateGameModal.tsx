@@ -3,14 +3,14 @@
 import { Modal } from '@/app/components/Modal'
 
 import React, { useState } from 'react'
-import { createTournament } from "@/app/lib/actions";
+import { createGame } from "@/app/lib/actions";
 
-type CreateTournamentModalProps = {
+type CreateGameModalProps = {
     isOpen: boolean
     onCloseAction: () => void
 }
 
-export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateTournamentModalProps) {
+export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateGameModalProps) {
     const [error, setError] = useState('')
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -18,9 +18,15 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
         setError('')
 
         const formData = new FormData(e.currentTarget)
+        const playerWhite = formData.get('playerWhite') as string
+        const playerBlack = formData.get('playerBlack') as string
+        const date = formData.get('date') as string
+        const pgn = formData.get('pgn') as string
+        const result = formData.get('result') as string
+        const tournament = formData.get('tournament') as string
 
         try {
-            const result = await createTournament(formData)
+            const result = await createGame(formData)
 
             if (!result) {
                 setError(error)
@@ -29,7 +35,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
                 onCloseAction()
             }
         } catch (error) {
-            setError('could not create tournament')
+            setError('could not create game')
         }
     }
 
@@ -37,42 +43,80 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
         <Modal
             isOpen={isOpen}
             onCloseAction={onCloseAction}
-            title="Create Tournament"
+            title="Create Game"
         >
             <form onSubmit={handleSubmit}>
                 <div className="space-y-4 mb-8">
                     <div>
                         <label className="block text-mb font-medium mb-1">
-                            Name
+                            Tournament
                         </label>
                         <input
                             type="text"
-                            name="name"
-                            placeholder="tournament name"
+                            name="tournament"
+                            placeholder="tournament"
                             className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
                             required
                         />
                     </div>
                     <div>
                         <label className="block text-mb font-medium mb-1">
-                            Start
+                            Date
                         </label>
                         <input
                             type="date"
-                            name="start"
+                            name="date"
+                            placeholder="date"
                             className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
                             required
                         />
                     </div>
                     <div>
                         <label className="block text-mb font-medium mb-1">
-                            End
+                            White Player
                         </label>
                         <input
-                            type="date"
-                            name="end"
-                            placeholder="(optional)"
+                            type="text"
+                            name="playerWhite"
+                            placeholder="player with white"
                             className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-mb font-medium mb-1">
+                            Black Player
+                        </label>
+                        <input
+                            type="text"
+                            name="playerBlack"
+                            placeholder="white with black"
+                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-mb font-medium mb-1">
+                            Pgn
+                        </label>
+                        <input
+                            type="text"
+                            name="pgn"
+                            placeholder="pgn"
+                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-mb font-medium mb-1">
+                            Result
+                        </label>
+                        <input
+                            type="text"
+                            name="result"
+                            placeholder="result"
+                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            required
                         />
                     </div>
                 </div>
@@ -88,7 +132,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
                         type="submit"
                         className="px-4 py-2 rounded-lg bg-light-secondary dark:bg-dark-secondary font-medium"
                     >
-                        Create Tournament
+                        Create Game
                     </button>
                     {error && (
                         <div className="text-error pt-3 pb-5">
