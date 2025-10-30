@@ -2,8 +2,10 @@
 
 import { Modal } from '@/app/components/Modal'
 
-import React, { useState } from 'react'
-import { createGame } from "@/app/lib/actions";
+import React, {useEffect, useState} from 'react'
+import {createGame, getAllUserTournaments} from "@/app/lib/actions";
+import {Tournament} from "@/app/lib/definitions";
+import {CreateTournamentButton} from "@/app/components/Dashboard/Tournaments/CreateTournamentButton";
 
 type CreateGameModalProps = {
     isOpen: boolean
@@ -11,6 +13,14 @@ type CreateGameModalProps = {
 }
 
 export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateGameModalProps) {
+    const [options, setOptions] = useState<Tournament[]>([])
+
+    useEffect(() => {
+        if (isOpen) {
+            getAllUserTournaments().then(setOptions)
+        }
+    }, [isOpen])
+
     const [error, setError] = useState('')
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -18,12 +28,6 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
         setError('')
 
         const formData = new FormData(e.currentTarget)
-        const playerWhite = formData.get('playerWhite') as string
-        const playerBlack = formData.get('playerBlack') as string
-        const date = formData.get('date') as string
-        const pgn = formData.get('pgn') as string
-        const result = formData.get('result') as string
-        const tournament = formData.get('tournament') as string
 
         try {
             const result = await createGame(formData)
@@ -48,16 +52,33 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
             <form onSubmit={handleSubmit}>
                 <div className="space-y-4 mb-8">
                     <div>
-                        <label className="block text-mb font-medium mb-1">
-                            Tournament
-                        </label>
-                        <input
-                            type="text"
-                            name="tournament"
-                            placeholder="tournament"
-                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
-                            required
-                        />
+                        {options.length !== 0 && (
+                            <>
+                                <label className="block text-mb font-medium mb-1">
+                                    Tournament
+                                </label>
+                                <select
+                                    id="tournament"
+                                    name="tournament"
+                                    multiple={false}
+                                    required
+                                    className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none"
+                                >
+                                    {options.map((tournament) => (
+                                        <option key={tournament.id} value={tournament.id}>
+                                            {tournament.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </>
+                        )}
+
+                        {options.length === 0 && (
+                            <>
+                                <span>No Tournaments yet</span>
+                                <CreateTournamentButton/>
+                            </>
+                        )}
                     </div>
                     <div>
                         <label className="block text-mb font-medium mb-1">

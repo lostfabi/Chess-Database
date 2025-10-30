@@ -32,8 +32,3 @@ export const createGameScheme = z.object({
     date: z.string().refine(date => !isNaN(Date.parse(date)), 'invalid date'),
     result: z.string()
 })
-
-export type LoginInput = z.infer<typeof loginScheme>
-export type RegisterInput = z.infer<typeof registerScheme>
-export type CreateTournamentInput = z.infer<typeof createTournamentScheme>
-export type CreateGameInput = z.infer<typeof createGameScheme>
