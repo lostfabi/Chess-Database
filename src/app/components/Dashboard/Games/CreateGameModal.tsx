@@ -64,7 +64,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                                     required
                                     className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none"
                                 >
-                                    {options.map((tournament) => (
+                                    {options.map((tournament: Tournament) => (
                                         <option key={tournament.id} value={tournament.id}>
                                             {tournament.name}
                                         </option>
@@ -74,10 +74,10 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                         )}
 
                         {options.length === 0 && (
-                            <>
+                            <div className="flex flex-row justify-between items-center">
                                 <span>No Tournaments yet</span>
                                 <CreateTournamentButton/>
-                            </>
+                            </div>
                         )}
                     </div>
                     <div>
@@ -145,13 +145,13 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                     <button
                         type="button"
                         onClick={onCloseAction}
-                        className="px-4 py-2 rounded-lg bg-light-primary dark:bg-dark-primary font-medium"
+                        className="px-4 py-2 rounded-lg bg-light-secondary dark:bg-dark-secondary font-medium"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        className="px-4 py-2 rounded-lg bg-light-secondary dark:bg-dark-secondary font-medium"
+                        className="px-4 py-2 rounded-lg bg-light-primary dark:bg-dark-primary font-medium"
                     >
                         Create Game
                     </button>
