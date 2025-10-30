@@ -32,9 +32,9 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
         try {
             const result = await createGame(formData)
 
-            if (!result) {
+            if (!result.success) {
                 setError(error)
-            } else if (result) {
+            } else if (result.success) {
                 e.currentTarget.reset()
                 onCloseAction()
             }

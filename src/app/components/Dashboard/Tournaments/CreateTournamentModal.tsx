@@ -19,17 +19,12 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
 
         const formData = new FormData(e.currentTarget)
 
-        try {
-            const result = await createTournament(formData)
+        const result = await createTournament(formData)
 
-            if (!result) {
-                setError(error)
-            } else if (result) {
-                e.currentTarget.reset()
-                onCloseAction()
-            }
-        } catch (error) {
-            setError('could not create tournament')
+        if (!result.success) {
+            setError(error)
+        } else if (result.success) {
+            onCloseAction()
         }
     }
 

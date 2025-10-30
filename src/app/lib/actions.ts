@@ -233,7 +233,7 @@ export async function createTournament(formData: FormData) {
             startDate,
             endDate,
             userId,
-            score: 0  // Default-Wert
+            score: 0
         })
 
     if (error) {

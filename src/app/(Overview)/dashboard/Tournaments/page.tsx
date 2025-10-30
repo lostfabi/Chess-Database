@@ -1,11 +1,12 @@
 import { getCurrentUser, getAllUserTournaments } from "@/app/lib/actions";
 import TournamentCard from "@/app/components/Dashboard/Tournaments/TournamentCard";
 import {CreateTournamentButton} from "@/app/components/Dashboard/Tournaments/CreateTournamentButton";
+import {Tournament} from "@/app/lib/definitions";
 
 export const dynamic = 'force-dynamic'
 
 export default async function() {
-    const tournaments = await getAllUserTournaments()
+    const tournaments: Tournament[] = await getAllUserTournaments()
     const user = await getCurrentUser()
     if(!user) return null
 
