@@ -3,6 +3,7 @@ import { getTournamentState } from "@/app/lib/helperFunctions";
 import { formatDateToString } from "@/app/lib/helperFunctions";
 import { getGamesFromTournament } from "@/app/lib/actions";
 import Link from "next/link";
+import {FaEllipsisV} from "react-icons/fa";
 
 type TournamentCardProps = {
     tournament: Tournament
@@ -21,9 +22,13 @@ export default async function({ tournament }: TournamentCardProps) {
                 <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 hover:bg-light-secondary/50 dark:hover:bg-dark-secondary/50 p-3 rounded-md">
                     <div className="flex justify-between items-center mb-3">
                         <h2>{tournament.name}</h2>
-                        <p className={`text-light-text p-2 text-xs rounded-sm min-w-1/8 text-center
+                        <div className="flex items-center gap-5">
+                            <p className={`text-light-text p-2 text-xs rounded-sm min-w-1/8 text-center
                                 ${state === 'ongoing' ? 'bg-ongoing/80' :
-                            state === 'upcoming' ? 'bg-upcoming/80' : 'bg-completed/80'}`}>{state}</p>
+                                state === 'upcoming' ? 'bg-upcoming/80' : 'bg-completed/80'}`}>{state}
+                            </p>
+                            <FaEllipsisV />
+                        </div>
                     </div>
                     <div className="flex flex-row justify-between">
                         <div>
