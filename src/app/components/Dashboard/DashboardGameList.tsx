@@ -1,4 +1,4 @@
-import {getUserGames, getTournamentFromGameId} from "@/app/lib/actions";
+import {getUserGames, getTournamentNameFromGameId} from "@/app/lib/actions";
 import ChessboardCard from "@/app/components/Chessboard/ChessboardCard";
 import { Game } from "@/app/lib/definitions";
 
@@ -7,7 +7,7 @@ export default async function DashboardGameList() {
     const gamesWithTournaments = await Promise.all(
         games.map(async (game: Game) => ({
             game,
-            tournament: await getTournamentFromGameId(game)
+            tournament: await getTournamentNameFromGameId(game)
         }))
     )
 

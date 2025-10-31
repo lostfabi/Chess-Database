@@ -33,6 +33,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
             isOpen={isOpen}
             onCloseAction={onCloseAction}
             title="Create Tournament"
+            size="sm"
         >
             <form onSubmit={handleSubmit}>
                 <div className="space-y-4 mb-8">

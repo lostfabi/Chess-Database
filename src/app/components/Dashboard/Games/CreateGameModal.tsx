@@ -56,19 +56,12 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
         const fullPgn = `${headers}\n\n${game.pgn}`
         formData.set('pgn', fullPgn)
 
-        console.log(fullPgn)
+        const result = await createGame(formData)
 
-        try {
-            const result = await createGame(formData)
-
-            if (!result.success) {
-                setError(error)
-            } else if (result.success) {
-                e.currentTarget.reset()
-                onCloseAction()
-            }
-        } catch (error) {
-            setError('could not create game')
+        if (!result.success) {
+            setError(error)
+        } else if (result.success) {
+            onCloseAction()
         }
     }
 

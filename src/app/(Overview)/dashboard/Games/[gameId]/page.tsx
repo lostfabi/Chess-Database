@@ -1,4 +1,4 @@
-import {getGameById, getTournamentFromGameId} from "@/app/lib/actions";
+import {getGameById, getTournamentNameFromGameId} from "@/app/lib/actions";
 import {notFound} from "next/navigation";
 import GameCard from "@/app/components/Dashboard/Games/GameCard";
 import {Game, Tournament} from "@/app/lib/definitions";
@@ -6,7 +6,7 @@ import {Game, Tournament} from "@/app/lib/definitions";
 export default async function GamePage({ params }: {params: Promise<{ gameId: string }>}) {
     const { gameId } = await params
     const game: Game = await getGameById(gameId)
-    const tournament: Tournament = await getTournamentFromGameId(game)
+    const tournament: Tournament = await getTournamentNameFromGameId(game)
 
     if(!game) return notFound()
 
