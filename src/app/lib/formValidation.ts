@@ -25,7 +25,7 @@ export const createTournamentScheme = z.object({
 })
 
 export const createGameScheme = z.object({
-    tournamentId: z.number,
+    tournamentId: z.coerce.number(),
     playerWhite: z.string().min(1, 'player required'),
     playerBlack: z.string().min(1, 'player required'),
     pgn: z.string().min(10, 'invalid pgn'),

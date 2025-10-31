@@ -26,31 +26,6 @@ export default function MinimalChessboard() {
 
     return (
         <div className="flex flex-row items-center justify-center m-5">
-            <div className="w-1/3">
-                <form>
-                    <label>Event:
-                        <input type="text" name="event"/>
-                    </label>
-                    <label>Spielort:
-                        <input type="text" name="site"/>
-                    </label>
-                    <label>Datum:
-                        <input type="date" name="date"/>
-                    </label>
-                    <label>Runde:
-                        <input type="number" name="round"/>
-                    </label>
-                    <label>Weiß:
-                        <input type="text" name="white"/>
-                    </label>
-                    <label>Schwarz:
-                        <input type="text" name="black"/>
-                    </label>
-                    <label>Ergebnis:
-                        <input type="text" name="result"/>
-                    </label>
-                </form>
-            </div>
             <div className="w-1/3 mr-5 ml-5">
                 <Chessboard options = {{showNotation: true, position: game.fen(), onPieceDrop: onDrop as any}}/>
             </div>

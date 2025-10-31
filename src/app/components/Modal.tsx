@@ -9,9 +9,15 @@ type ModalProps = {
     onCloseAction: () => void
     title: string
     children: React.ReactNode
+    size?: 'sm' | 'xl'
 }
 
-export function Modal({ isOpen, onCloseAction, title, children }: ModalProps) {
+export function Modal({ isOpen, onCloseAction, title, children, size = 'sm' }: ModalProps) {
+    const sizeClasses = {
+        sm: 'w-1/4 max-w-1/4',
+        xl: 'w-1/2 max-w-1/2'
+    }
+
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
             if (e.key === 'Escape') onCloseAction()
@@ -36,7 +42,7 @@ export function Modal({ isOpen, onCloseAction, title, children }: ModalProps) {
             onClick={onCloseAction}>
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             <div
-                className={"relative max-w-md w-full"}
+                className={`relative ${sizeClasses[size]}`}
                 onClick={(e) => e.stopPropagation()}>
                 <div className="bg-light-primary/70 dark:bg-dark-primary/70 rounded-lg overflow-hidden p-4">
                     <div className="flex items-center justify-between mb-5">

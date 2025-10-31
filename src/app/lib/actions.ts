@@ -83,7 +83,7 @@ export async function getTournamentById(id: number): Promise<Tournament> {
 export async function getTournamentByName(name: string): Promise<Tournament> {
     const { data, error } = await supabase
         .from('Tournament')
-        .select('id')
+        .select('*')
         .eq('name', name)
         .single()
 
@@ -91,6 +91,7 @@ export async function getTournamentByName(name: string): Promise<Tournament> {
         console.error('Error fetching tournament:', error)
         throw new Error(`Tournament ${name} not found`)
     }
+    console.log(data)
     return data as Tournament
 }
 
@@ -246,6 +247,7 @@ export async function createTournament(formData: FormData) {
 
 export async function createGame(formData: FormData) {
     const tournamentName = formData.get('tournament') as string
+
     if(!tournamentName) return { error: 'no tournament name found' }
 
     const tournament = await getTournamentByName(tournamentName)
