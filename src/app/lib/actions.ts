@@ -289,3 +289,7 @@ export async function createGame(formData: FormData) {
 
     return { success: true }
 }
+
+export async function deleteGame(gameId: string) {}
+
+export async function deleteTournament(tournament: Tournament) {}
