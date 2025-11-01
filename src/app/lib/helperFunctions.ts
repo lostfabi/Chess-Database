@@ -55,3 +55,14 @@ export function movesToArray(history: string[]) {
 
     return moveArray
 }
+
+export function formatPgnWithHeader(history: string[], header: string): string {
+    const moves = history.reduce((acc, move, i) => {
+        if(i % 2 === 0) {
+            return acc + `${Math.floor(i / 2) + 1}. ${move} `
+        }
+        return acc + `${move} `
+    }, '').trim()
+
+    return `${header}\n\n${moves}`
+}

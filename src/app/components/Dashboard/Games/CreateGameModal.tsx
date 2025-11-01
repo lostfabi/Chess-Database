@@ -8,6 +8,7 @@ import { Tournament } from "@/app/lib/definitions";
 import { CreateTournamentButton } from "@/app/components/Dashboard/Tournaments/CreateTournamentButton";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
+import {formatPgnWithHeader} from "@/app/lib/helperFunctions";
 
 type CreateGameModalProps = {
     isOpen: boolean
@@ -19,6 +20,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
     function onDrop({sourceSquare, targetSquare}: {sourceSquare: string, targetSquare: string}) {
         const gameCopy = new Chess(game.fen())
         gameCopy.loadPgn(game.pgn())
+        console.log(game.pgn())
 
         const move = gameCopy.move({
             from: sourceSquare,
@@ -52,13 +54,14 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
             `[Black "${formData.get('playerBlack')}"]`,
             `[Date "${formData.get('date')}"]`,
             `[Result "${formData.get('result')}"]`
-        ]
-        const fullPgn = `${headers}\n\n${game.pgn}`
+        ].join('\n')
+
+        const fullPgn = formatPgnWithHeader(game.history(), headers)
         formData.set('pgn', fullPgn)
 
         const result = await createGame(formData)
 
-        if (!result.success) {
+        if (result.error) {
             setError(error)
         } else if (result.success) {
             onCloseAction()

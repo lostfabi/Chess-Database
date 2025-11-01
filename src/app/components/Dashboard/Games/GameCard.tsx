@@ -11,11 +11,9 @@ import {FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight} from "
 export default function GameCard({ game, tournament }: { game: Game, tournament: Tournament }) {
     const pgn = game.pgn
 
-    const [chess, setChess] = useState(new Chess());
     const [currentPosition, setCurrentPosition] = useState(new Chess().fen());
     const [moves, setMoves] = useState<string[]>([]);
     const [currentMoveIndex, setCurrentMoveIndex] = useState(-1);
-    const [lastMove, setLastMove] = useState<{ from: string; to: string } | null>(null);
 
     useEffect(() => {
         const newGame = new Chess()
@@ -25,30 +23,23 @@ export default function GameCard({ game, tournament }: { game: Game, tournament:
         setCurrentMoveIndex(-1)
 
         const startGame = new Chess();
-        setChess(startGame);
         setCurrentPosition(startGame.fen());
     }, [pgn]);
 
     useEffect(() => {
         const newGame = new Chess();
-        let lastMoveObj = null;
 
         if (currentMoveIndex >= 0) {
             for (let i = 0; i <= currentMoveIndex; i++) {
                 try {
-                    const move = newGame.move(moves[i]);
-                    if (i === currentMoveIndex && move) {
-                        lastMoveObj = { from: move.from, to: move.to };
-                    }
+                    newGame.move(moves[i]);
                 } catch (error) {
                     break;
                 }
             }
         }
 
-        setChess(newGame);
         setCurrentPosition(newGame.fen());
-        setLastMove(lastMoveObj);
     }, [currentMoveIndex, moves]);
 
     useEffect(() => {
@@ -75,8 +66,8 @@ export default function GameCard({ game, tournament }: { game: Game, tournament:
     const scores = splitResult(game.result)
 
     return(
-        <div className="max-h-full flex flex-row gap-4">
-            <div className="flex flex-col flex-1 space-y-2 justify-between">
+        <div className="max-h-full flex flex-row gap-4 w-full">
+            <div className="flex flex-col space-y-2 justify-between w-2/9">
                 <div className="flex flex-col">
                     <h2 className="self-end">{game.playerBlack}</h2>
                     <h2 className="self-end">{scores.black}</h2>
@@ -84,9 +75,14 @@ export default function GameCard({ game, tournament }: { game: Game, tournament:
                 <div className="flex flex-col gap-2 items-center">
                     <h2>{tournament.name}</h2>
                     <h3>{date}</h3>
-                    <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 p-2 rounded-md text-sm">
+                    <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 p-2 rounded-md text-sm max-h-2/3 overflow-auto">
                         <p className="whitespace-pre-line">
                             {pgn}
+                        </p>
+                    </div>
+                    <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 p-2 rounded-md text-sm max-h-1/5 max-w-full overflow-auto">
+                        <p className="whitespace-pre-line break-words">
+                            {currentPosition}
                         </p>
                     </div>
                 </div>
