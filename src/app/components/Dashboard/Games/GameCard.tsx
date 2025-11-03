@@ -6,7 +6,11 @@ import { Game, Tournament } from "@/app/lib/definitions";
 import { Chess } from "chess.js";
 import DisplayMoves from "./DisplayMoves";
 import { formatDateToString, splitResult } from "@/app/lib/helperFunctions";
-import {FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight} from "react-icons/fa";
+import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight, FaCopy } from "react-icons/fa";
+import { Button } from "../../Button";
+import copy from "copy-to-clipboard";
+import {options} from "preact";
+import {debug} from "node:util";
 
 export default function GameCard({ game, tournament }: { game: Game, tournament: Tournament }) {
     const pgn = game.pgn
@@ -80,11 +84,17 @@ export default function GameCard({ game, tournament }: { game: Game, tournament:
                             {pgn}
                         </p>
                     </div>
+                    <Button onClick={(): boolean => copy(pgn, { debug: true })}>
+                        <FaCopy />
+                    </Button>
                     <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 p-2 rounded-md text-sm max-h-1/5 max-w-full overflow-auto">
                         <p className="whitespace-pre-line break-words">
                             {currentPosition}
                         </p>
                     </div>
+                    <Button onClick={(): boolean => copy(currentPosition, { debug: true})}>
+                        <FaCopy />
+                    </Button>
                 </div>
                 <div className="flex flex-col self-end">
                     <h2 className="self-end">{game.playerWhite}</h2>
