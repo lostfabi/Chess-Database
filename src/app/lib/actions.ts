@@ -1,11 +1,11 @@
 'use server';
 
-import { auth, signIn } from "../../../auth";
-import { AuthError } from 'next-auth';
-import type { Game, Tournament, User } from '@/app/lib/definitions';
+import {auth, signIn} from "../../../auth";
+import {AuthError} from 'next-auth';
+import type {Game, Tournament, User} from '@/app/lib/definitions';
 import bcrypt from "bcrypt";
-import { createTournamentScheme, registerScheme, createGameScheme } from "@/app/lib/formValidation";
-import { supabase } from '@/app/lib/db';
+import {createGameScheme, createTournamentScheme, registerScheme} from "@/app/lib/formValidation";
+import {supabase} from '@/app/lib/db';
 
 export async function authenticate(
     prevState: string | undefined,
@@ -26,6 +26,7 @@ export async function authenticate(
     }
 }
 
+//region User functions
 export async function getSession() {
     const session = await auth()
     if(!session?.user?.id) return null
@@ -50,6 +51,55 @@ export async function getCurrentUser() {
     return data as User
 }
 
+export async function registerUser(formData: FormData) {
+    const validated = registerScheme.safeParse({
+        username: formData.get('username'),
+        email: formData.get('email'),
+        password: formData.get('password')
+    })
+
+    if (!validated.success) return { error: "validation error" }
+
+    const { username, email, password } = validated.data
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const { error } = await supabase
+        .from('User')
+        .insert({
+            username,
+            email,
+            password: hashedPassword
+        })
+
+    if (error) {
+        console.error('Registration error:', error)
+        return { error: 'registration failed' }
+    }
+
+    return { success: true }
+}
+//endregion
+
+//region Game functions
+export async function getUserGames() {
+    const userId = await getSession()
+    if (!userId) return []
+
+    const { data, error } = await supabase
+        .from('Game')
+        .select('*')
+        .eq('userId', userId)
+        .order('date', { ascending: false })
+
+    if (error) {
+        console.error('Error fetching games:', error)
+        throw new Error(`games from user: ${userId} not found`)
+    }
+
+    return data as Game[]
+}
+
 export async function getGameById(id: string) {
     const { data, error } = await supabase
         .from('Game')
@@ -65,6 +115,76 @@ export async function getGameById(id: string) {
     return data as Game
 }
 
+export async function getGamesFromTournament(tournament: Tournament) {
+    const { data, error } = await supabase
+        .from('Game')
+        .select('*')
+        .eq('tournamentId', tournament.id)
+
+    if (error) {
+        console.error('Error fetching games:', error)
+        throw new Error(`no games in tournament found`)
+    }
+
+    return data as Game[]
+}
+
+export async function createGame(formData: FormData) {
+    const tournamentName = formData.get('tournament') as string
+
+    if(!tournamentName) return { error: 'no tournament name found' }
+
+    const tournament = await getTournamentByName(tournamentName)
+    if (!tournament) return { error: 'tournament not found' };
+
+    const validated = createGameScheme.safeParse({
+        playerWhite: formData.get('playerWhite'),
+        playerBlack: formData.get('playerBlack'),
+        date: formData.get('date'),
+        pgn: formData.get('pgn'),
+        result: formData.get('result'),
+        tournamentId: tournament.id
+    })
+
+    const userId = await getSession()
+    if(!userId) return { error: "no user" }
+
+    if (!validated.success) {
+        console.error('Validation error:', validated.error)
+        return { error: "validation error" }
+    }
+
+    const { tournamentId, result, pgn, date, playerWhite, playerBlack } = validated.data
+
+    const { error } = await supabase
+        .from('Game')
+        .insert({
+            tournamentId,
+            result,
+            pgn,
+            userId,
+            date,
+            playerWhite,
+            playerBlack,
+        })
+
+    if (error) {
+        console.error('Game creation error:', error)
+        return { error: 'post operation failed' }
+    }
+
+    return { success: true }
+}
+
+export async function deleteGame(gameId: string) {
+    return supabase
+        .from('Game')
+        .delete()
+        .eq('id', gameId);
+}
+//endregion
+
+//region Tournament functions
 export async function getTournamentById(id: number): Promise<Tournament> {
     const { data, error } = await supabase
         .from('Tournament')
@@ -130,24 +250,6 @@ export async function getAllUserTournaments() {
     return data as Tournament[]
 }
 
-export async function getUserGames() {
-    const userId = await getSession()
-    if (!userId) return []
-
-    const { data, error } = await supabase
-        .from('Game')
-        .select('*')
-        .eq('userId', userId)
-        .order('date', { ascending: false })
-
-    if (error) {
-        console.error('Error fetching games:', error)
-        throw new Error(`games from user: ${userId} not found`)
-    }
-
-    return data as Game[]
-}
-
 export async function getTournamentNameFromGameId(game: Game) {
     const { data, error } = await supabase
         .from('Tournament')
@@ -161,49 +263,6 @@ export async function getTournamentNameFromGameId(game: Game) {
     }
 
     return data
-}
-
-export async function getGamesFromTournament(tournament: Tournament) {
-    const { data, error } = await supabase
-        .from('Game')
-        .select('*')
-        .eq('tournamentId', tournament.id)
-
-    if (error) {
-        console.error('Error fetching games:', error)
-        throw new Error(`no games in tournament found`)
-    }
-
-    return data as Game[]
-}
-
-export async function registerUser(formData: FormData) {
-    const validated = registerScheme.safeParse({
-        username: formData.get('username'),
-        email: formData.get('email'),
-        password: formData.get('password')
-    })
-
-    if (!validated.success) return { error: "validation error" }
-
-    const { username, email, password } = validated.data
-
-    const hashedPassword = await bcrypt.hash(password, 10)
-
-    const { error } = await supabase
-        .from('User')
-        .insert({
-            username,
-            email,
-            password: hashedPassword
-        })
-
-    if (error) {
-        console.error('Registration error:', error)
-        return { error: 'registration failed' }
-    }
-
-    return { success: true }
 }
 
 export async function createTournament(formData: FormData) {
@@ -243,53 +302,10 @@ export async function createTournament(formData: FormData) {
     return { success: true }
 }
 
-export async function createGame(formData: FormData) {
-    const tournamentName = formData.get('tournament') as string
-
-    if(!tournamentName) return { error: 'no tournament name found' }
-
-    const tournament = await getTournamentByName(tournamentName)
-    if (!tournament) return { error: 'tournament not found' };
-
-    const validated = createGameScheme.safeParse({
-        playerWhite: formData.get('playerWhite'),
-        playerBlack: formData.get('playerBlack'),
-        date: formData.get('date'),
-        pgn: formData.get('pgn'),
-        result: formData.get('result'),
-        tournamentId: tournament.id
-    })
-
-    const userId = await getSession()
-    if(!userId) return { error: "no user" }
-
-    if (!validated.success) {
-        console.error('Validation error:', validated.error)
-        return { error: "validation error" }
-    }
-
-    const { tournamentId, result, pgn, date, playerWhite, playerBlack } = validated.data
-
-    const { error } = await supabase
-        .from('Game')
-        .insert({
-            tournamentId,
-            result,
-            pgn,
-            userId,
-            date,
-            playerWhite,
-            playerBlack,
-        })
-
-    if (error) {
-        console.error('Game creation error:', error)
-        return { error: 'post operation failed' }
-    }
-
-    return { success: true }
+export async function deleteTournament(tournament: Tournament) {
+    return supabase
+        .from('Tournament')
+        .delete()
+        .eq('id', tournament.id);
 }
-
-export async function deleteGame(gameId: string) {}
-
-export async function deleteTournament(tournament: Tournament) {}
+//endregion

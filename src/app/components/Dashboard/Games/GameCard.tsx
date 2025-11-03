@@ -7,10 +7,8 @@ import { Chess } from "chess.js";
 import DisplayMoves from "./DisplayMoves";
 import { formatDateToString, splitResult } from "@/app/lib/helperFunctions";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight, FaCopy } from "react-icons/fa";
-import { Button } from "../../Button";
+import { Button } from "../../buttons/Button";
 import copy from "copy-to-clipboard";
-import {options} from "preact";
-import {debug} from "node:util";
 
 export default function GameCard({ game, tournament }: { game: Game, tournament: Tournament }) {
     const pgn = game.pgn
@@ -112,31 +110,31 @@ export default function GameCard({ game, tournament }: { game: Game, tournament:
                     <DisplayMoves history={moves} currentMoveIndex={currentMoveIndex} />
                 </div>
                 <div className="flex justify-center gap-2">
-                    <button
+                    <Button
                         onClick={goToStart}
-                        className="p-2 bg-light-accent dark:bg-dark-accent rounded-lg disabled:opacity-50"
+                        className="disabled:opacity-50"
                         disabled={currentMoveIndex === -1}
                         title="Zum Anfang">
                         <FaAngleDoubleLeft />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={goToPreviousMove}
-                        className="p-2 bg-light-accent dark:bg-dark-accent rounded-lg disabled:opacity-50"
+                        className="disabled:opacity-50"
                         disabled={currentMoveIndex === -1}>
                         <FaAngleLeft />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={goToNextMove}
-                        className="p-2 bg-light-accent dark:bg-dark-accent rounded-lg disabled:opacity-50"
+                        className="disabled:opacity-50"
                         disabled={currentMoveIndex === moves.length - 1}>
                         <FaAngleRight />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={goToEnd}
-                        className="p-2 bg-light-accent dark:bg-dark-accent rounded-lg disabled:opacity-50"
+                        className="disabled:opacity-50"
                         disabled={currentMoveIndex === moves.length - 1}>
                         <FaAngleDoubleRight />
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
