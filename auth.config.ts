@@ -2,7 +2,7 @@ import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
     pages: {
-        signIn: '/login',
+        signIn: "/auth/login",
     },
     callbacks: {
         async jwt({ token, user }) {
@@ -18,12 +18,12 @@ export const authConfig = {
             return session
         },
         authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user
-            const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
+            const isLoggedIn: boolean = !!auth?.user
+
+            const isOnDashboard: boolean = nextUrl.pathname.startsWith("/dashboard")
 
             if (isOnDashboard) {
                 return isLoggedIn;
-
             }
 
             return true
