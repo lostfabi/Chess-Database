@@ -1,11 +1,11 @@
 'use server';
 
-import {auth, signIn} from "../../../auth";
-import {AuthError} from 'next-auth';
-import type {Game, Tournament, User} from '@/app/lib/definitions';
+import { auth, signIn } from "../../../auth";
+import { AuthError } from 'next-auth';
+import type { Game, Tournament, User } from '@/app/lib/definitions';
 import bcrypt from "bcrypt";
-import {createGameScheme, createTournamentScheme, registerScheme} from "@/app/lib/formValidation";
-import {supabase} from '@/app/lib/db';
+import { createGameScheme, createTournamentScheme, registerScheme } from "@/app/lib/formValidation";
+import { supabase } from '@/app/lib/db';
 
 export async function authenticate(
     prevState: string | undefined,

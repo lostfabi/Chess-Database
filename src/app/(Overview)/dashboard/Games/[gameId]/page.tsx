@@ -6,13 +6,13 @@ import {Game, Tournament} from "@/app/lib/definitions";
 export default async function GamePage({ params }: {params: Promise<{ gameId: string }>}) {
     const { gameId } = await params
     const game: Game = await getGameById(gameId)
-    const tournament: Tournament = await getTournamentNameFromGameId(game)
+    const tournament = await getTournamentNameFromGameId(game)
 
     if(!game) return notFound()
 
     return(
         <div className="h-full flex flex-row gap-2">
-            <GameCard game={game} tournament={tournament}/>
+            <GameCard game={game} tournament={tournament.name}/>
         </div>
     )
 }
