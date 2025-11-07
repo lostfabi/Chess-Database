@@ -1,9 +1,12 @@
 import { CreateGameButton } from "@/app/components/Dashboard/Games/CreateGameButton";
-import { getTournamentNameFromGameId, getUserGames } from "@/app/lib/actions";
+import {getCurrentUser, getTournamentNameFromGameId, getUserGames} from "@/app/lib/actions";
 import { Game } from "@/app/lib/definitions";
 import ChessboardCard from "@/app/components/Chessboard/ChessboardCard";
 
 export default async function() {
+    const user = await getCurrentUser()
+    if(!user) return <h1>please login</h1>
+
     const games: Game[] = await getUserGames()
     const tournaments = await Promise.all(
         games.map(game => getTournamentNameFromGameId(game))

@@ -7,10 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
     const user = await getCurrentUser()
-
-    if(!user) {
-        return <div>Bitte anmelden</div>
-    }
+    if(!user) return <h1>please login</h1>
 
     return(
         <div>

@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 export default async function() {
     const tournaments: Tournament[] = await getAllUserTournaments()
     const user = await getCurrentUser()
-    if(!user) return null
+    if(!user) return <h1>please login</h1>
 
     return(
         <div>
