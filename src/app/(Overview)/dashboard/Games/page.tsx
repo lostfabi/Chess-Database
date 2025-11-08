@@ -1,7 +1,7 @@
 import { CreateGameButton } from "@/app/components/Dashboard/Games/CreateGameButton";
 import {getCurrentUser, getTournamentNameFromGameId, getUserGames} from "@/app/lib/actions";
 import { Game } from "@/app/lib/definitions";
-import ChessboardCard from "@/app/components/Chessboard/ChessboardCard";
+import ChessboardCard from "@/app/components/Dashboard/Games/GameCard";
 
 export default async function() {
     const user = await getCurrentUser()

@@ -1,6 +1,6 @@
 import { getGamesFromTournament } from "@/app/lib/actions";
 import { Game, Tournament } from "@/app/lib/definitions";
-import ChessboardCard from "@/app/components/Chessboard/ChessboardCard";
+import ChessboardCard from "@/app/components/Dashboard/Games/GameCard";
 
 export default async function TournamentGameList({ tournament }: { tournament: Tournament }) {
     const games: Game[] = await getGamesFromTournament(tournament)

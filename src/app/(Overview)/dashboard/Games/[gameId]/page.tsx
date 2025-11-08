@@ -1,6 +1,6 @@
 import {getGameById, getTournamentNameFromGameId} from "@/app/lib/actions";
 import {notFound} from "next/navigation";
-import GameCard from "@/app/components/Dashboard/Games/GameCard";
+import GameView from "@/app/components/Dashboard/Games/GameView";
 import {Game, Tournament} from "@/app/lib/definitions";
 
 export default async function GamePage({ params }: {params: Promise<{ gameId: string }>}) {
@@ -12,7 +12,7 @@ export default async function GamePage({ params }: {params: Promise<{ gameId: st
 
     return(
         <div className="h-full flex flex-row gap-2">
-            <GameCard game={game} tournament={tournament.name}/>
+            <GameView game={game} tournament={tournament.name}/>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import {getUserGames, getTournamentNameFromGameId} from "@/app/lib/actions";
-import ChessboardCard from "@/app/components/Chessboard/ChessboardCard";
+import ChessboardCard from "@/app/components/Dashboard/Games/GameCard";
 import { Game } from "@/app/lib/definitions";
 
 export default async function DashboardGameList() {
