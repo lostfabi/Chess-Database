@@ -63,7 +63,7 @@ export async function registerUser(formData: FormData) {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const { error } = await supabase
+    const { data, error } = await supabase
         .from('User')
         .insert({
             username,
@@ -76,7 +76,7 @@ export async function registerUser(formData: FormData) {
         return { error: 'registration failed' }
     }
 
-    return { success: true }
+    return { data, success: true }
 }
 
 export async function getUserGames() {
