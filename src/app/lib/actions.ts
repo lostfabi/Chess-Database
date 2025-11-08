@@ -26,7 +26,6 @@ export async function authenticate(
     }
 }
 
-//region User functions
 export async function getSession() {
     const session = await auth()
     if(!session?.user?.id) return null
@@ -79,9 +78,7 @@ export async function registerUser(formData: FormData) {
 
     return { success: true }
 }
-//endregion
 
-//region Game functions
 export async function getUserGames() {
     const userId = await getSession()
     if (!userId) return []
@@ -182,9 +179,7 @@ export async function deleteGame(gameId: string) {
         .delete()
         .eq('id', gameId);
 }
-//endregion
 
-//region Tournament functions
 export async function getTournamentById(id: number): Promise<Tournament> {
     const { data, error } = await supabase
         .from('Tournament')
@@ -308,4 +303,3 @@ export async function deleteTournament(tournament: Tournament) {
         .delete()
         .eq('id', tournament.id);
 }
-//endregion
