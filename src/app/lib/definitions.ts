@@ -7,7 +7,7 @@ export type User = {
 };
 
 export type Tournament = {
-    id: number;
+    id: string;
     name: string;
     startDate: Date;
     endDate?: Date;

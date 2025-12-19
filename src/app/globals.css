@@ -15,29 +15,12 @@
 
     --color-success: #10b981;
     --color-warning: #f59e0b;
-    --color-error: #ef4444;
+    --color-error: #850000;
 
     --color-ongoing: #23c64c;
     --color-completed: #c63e23;
     --color-upcoming: #ddb333;
 }
-
-/*
-:root[data-theme="light"] {
-    --text: #110c09;
-    --background: #f1eae4;
-    --primary: #624732;
-    --secondary: #98c48d;
-    --accent: #4b915d;
-}
-:root[data-theme="dark"] {
-    --text: #f6f1ed;
-    --background: #1b140e;
-    --primary: #cdb29d;
-    --secondary: #46733b;
-    --accent: #6eb581;
-}
-*/
 
 @theme inline {
   --color-background: var(--background);

@@ -3,76 +3,73 @@
 import { Button } from '@/app/components/buttons/Button';
 import React, { useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
-import { useSearchParams } from 'next/navigation';
 import Link from "next/link";
 
 export default function Login() {
-    const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
     const [errorMessage, formAction, isPending] = useActionState(
         authenticate,
         undefined,
     );
 
     return (
-        <div className="h-screen dark:bg-dark-background flex items-center justify-center">
+        <div className="h-screen dark:bg-dark-background text-dark-text dark:text-light-text flex items-center justify-center">
             <form action={formAction} className="w-1/5 space-y-3">
-                <div className="rounded-lg bg-light-primary dark:bg-dark-primary px-6 pb-4 pt-8">
-                    <h1 className="mb-3 text-2xl text-dark-text dark:text-light-text">
-                        Log in
+                <div className="flex flex-col rounded-lg bg-light-primary dark:bg-dark-primary py-8 px-5 gap-5">
+                    <h1 className="flex flex-col items-center text-2xl">
+                        Sign in
                     </h1>
-                    <div className="w-full">
+                    <div className="flex flex-col w-full gap-4">
                         <div>
                             <label
-                                className="mb-3 mt-5 block text-xs font-medium text-dark-text dark:text-light-text"
-                                htmlFor="email"
-                            >
+                                className="mb-1 block text-s font-medium"
+                                htmlFor="email">
                                 Email
                             </label>
                             <div className="relative">
                                 <input
-                                    className="peer block w-full rounded-md border text-dark-text dark:border-dark-secondary dark:text-light-text py-[9px] pr-2 pl-2 text-sm placeholder:text-gray-500"
+                                    className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
                                     id="email"
                                     type="email"
                                     name="email"
-                                    placeholder="Enter your email address"
-                                    required
-                                />
+                                    placeholder="your email"
+                                    required/>
                             </div>
                         </div>
-                        <div className="mt-4">
+                        <div>
                             <label
-                                className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-                                htmlFor="password"
-                            >
+                                className="mb-1 block text-s font-medium"
+                                htmlFor="password">
                                 Password
                             </label>
                             <div className="relative">
                                 <input
-                                    className="peer block w-full rounded-md border text-dark-text border-light-secondary dark:border-dark-secondary dark:text-light-text py-[9px] pl-2 pr-2 text-sm placeholder:text-gray-500"
+                                    className="peer block w-full rounded-md border-2 outline-none border-light-secondary dark:border-dark-accent py-2 p-2 text-sm placeholder:text-gray-600"
                                     id="password"
                                     type="password"
                                     name="password"
                                     placeholder="Enter password"
                                     required
-                                    minLength={6}
-                                />
+                                    minLength={6}/>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="redirectTo" value={callbackUrl} />
+                    <input type="hidden" name="redirectTo" value={"/dashboard"} />
                     <div className="flex flex-col justify-center items-center">
-                        <Button className="mt-8 bg-light-accent dark:bg-dark-accent text-dark-text dark:text-light-text" aria-disabled={isPending}>
-                            Log in
-                        </Button>
+                        <div className="flex flex-row justify-between w-full">
+                            <Button className="bg-light-accent dark:bg-dark-accent" aria-disabled={isPending}>
+                                Log in
+                            </Button>
+                            <Link className="flex items-center px-4" href={"/auth/register"}>
+                                Create account
+                            </Link>
+                        </div>
                         <div
-                            className="flex h-8 items-end space-x-1"
+                            className="flex items-end space-x-1"
                             aria-live="polite"
-                            aria-atomic="true"
-                        >
+                            aria-atomic="true">
                             {errorMessage && (
                                 <>
-                                    <p className="text-sm text-error">{errorMessage}</p>
+                                    <p className="text-m italic text-error">{errorMessage}</p>
                                 </>
                             )}
                         </div>
