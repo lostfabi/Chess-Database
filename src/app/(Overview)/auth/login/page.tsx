@@ -60,7 +60,9 @@ export default function Login() {
                                 Log in
                             </Button>
                             <Link className="flex items-center px-4" href={"/auth/register"}>
-                                Create account
+                                <Button className="bg-light-accent dark:bg-dark-accent">
+                                    create account
+                                </Button>
                             </Link>
                         </div>
                         <div

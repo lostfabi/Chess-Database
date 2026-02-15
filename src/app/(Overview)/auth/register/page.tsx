@@ -49,7 +49,6 @@ export default function RegisterPage() {
                                 <input
                                     className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
                                     id="username"
-                                    //type="username"
                                     name="username"
                                     placeholder="username"
                                     required/>
@@ -64,7 +63,6 @@ export default function RegisterPage() {
                             <div>
                                 <input
                                     className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
-                                    //type="email"
                                     id="email"
                                     name="email"
                                     placeholder="email"
@@ -107,10 +105,12 @@ export default function RegisterPage() {
                     <div className="flex flex-col justify-center items-center gap-4">
                         <div className="flex flex-row justify-between w-full">
                             <Button className="bg-light-accent dark:bg-dark-accent" type="submit">
-                                register
+                                create
                             </Button>
                             <Link className="flex items-center px-4" href={"/auth/login"}>
-                                login
+                                <Button className="bg-light-accent dark:bg-dark-accent">
+                                    login
+                                </Button>
                             </Link>
                         </div>
                         <div
