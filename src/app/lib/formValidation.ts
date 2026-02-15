@@ -6,13 +6,17 @@ export const loginScheme = z.object({
 })
 
 export const registerScheme = z.object({
-    email: z.email('invalid email'),
+    email: z.email({ message: 'invalid email' }),
     username: z.string()
-        .min(3, 'name must be 3 characters long'),
+        .min(3, { message: 'name must be 3 characters long' }),
     password: z.string()
-        .min(10, 'password must be at least 10 characters long')
-        .regex(/[A-Z]/, 'need upper case letter')
-        .regex(/[0-9]/, 'need a number')
+        .min(10, { message: 'password must be at least 10 characters long' })
+        .regex(/[A-Z]/, { message: 'need upper case letter' })
+        .regex(/[0-9]/, { message: 'need a number' }),
+    confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+    message: "passwords dont match",
+    path: ["confirmPassword"],
 })
 
 export const createTournamentScheme = z.object({

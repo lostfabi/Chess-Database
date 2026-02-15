@@ -20,17 +20,14 @@ export default function RegisterPage() {
         const password = formData.get('password') as string
         const confirmPassword = formData.get('confirmPassword') as string
 
-        if (password !== confirmPassword) {
-            setError('passwords dont match')
-            return
+        const result = await registerUser(formData)
+
+        if(result.error) {
+            setError(result.error);
+            return;
         }
-
-        try {
-            await registerUser(formData)
-
-            router.push('/auth/login')
-        } catch (error) {
-            setError('error')
+        else {
+            router.push('/auth/login');
         }
     }
 
@@ -52,10 +49,9 @@ export default function RegisterPage() {
                                 <input
                                     className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
                                     id="username"
-                                    type="username"
+                                    //type="username"
                                     name="username"
                                     placeholder="username"
-                                    minLength={3}
                                     required/>
                             </div>
                         </div>
@@ -68,7 +64,7 @@ export default function RegisterPage() {
                             <div>
                                 <input
                                     className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
-                                    type="email"
+                                    //type="email"
                                     id="email"
                                     name="email"
                                     placeholder="email"
@@ -88,8 +84,7 @@ export default function RegisterPage() {
                                     id="password"
                                     name="password"
                                     placeholder="password"
-                                    required
-                                    minLength={10}/>
+                                    required/>
                             </div>
                         </div>
                         <div>
@@ -105,8 +100,7 @@ export default function RegisterPage() {
                                     id="confirmPassword"
                                     name="confirmPassword"
                                     placeholder="repeat password"
-                                    required
-                                    minLength={10}/>
+                                    required/>
                             </div>
                         </div>
                     </div>

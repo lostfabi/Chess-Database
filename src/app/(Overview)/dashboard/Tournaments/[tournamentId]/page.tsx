@@ -7,9 +7,9 @@ export default  async function TournamentPage({ params }: {params: Promise<{ tou
     const tournament: Tournament = await getTournamentById(tournamentId)
 
     return(
-        <div>
+        <>
             <h1>{tournament.name}</h1>
             <TournamentGameList tournament={tournament}></TournamentGameList>
-        </div>
+        </>
     )
 }
