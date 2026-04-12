@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import {Button} from "@/components/buttons/Button";
 import Link from "next/link";
@@ -32,9 +32,9 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="h-screen dark:bg-dark-background flex items-center justify-center text-dark-text dark:text-light-text">
+        <div className="h-screen flex items-center justify-center text-text">
             <form onSubmit={handleSubmit} className="w-1/5 space-y-3">
-                <div className="flex flex-col rounded-lg bg-light-primary dark:bg-dark-primary py-8 px-5 gap-5">
+                <div className="flex flex-col rounded-lg bg-primary py-8 px-5 gap-5">
                     <h1 className="flex flex-col items-center text-2xl">
                         Create account
                     </h1>
@@ -47,7 +47,7 @@ export default function RegisterPage() {
                             </label>
                             <div className="relative">
                                 <input
-                                    className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
+                                    className="block w-full rounded-md border-2 outline-none p-2 text-sm placeholder:text-gray-600"
                                     id="username"
                                     name="username"
                                     placeholder="username"
@@ -62,7 +62,7 @@ export default function RegisterPage() {
                             </label>
                             <div>
                                 <input
-                                    className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
+                                    className="block w-full rounded-md border-2 outline-none p-2 text-sm placeholder:text-gray-600"
                                     id="email"
                                     name="email"
                                     placeholder="email"
@@ -77,7 +77,7 @@ export default function RegisterPage() {
                             </label>
                             <div>
                                 <input
-                                    className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
+                                    className="block w-full rounded-md border-2 outline-none p-2 text-sm placeholder:text-gray-600"
                                     type="password"
                                     id="password"
                                     name="password"
@@ -93,7 +93,7 @@ export default function RegisterPage() {
                             </label>
                             <div>
                                 <input
-                                    className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
+                                    className="block w-full rounded-md border-2 outline-none p-2 text-sm placeholder:text-gray-600"
                                     type="password"
                                     id="confirmPassword"
                                     name="confirmPassword"
@@ -104,11 +104,11 @@ export default function RegisterPage() {
                     </div>
                     <div className="flex flex-col justify-center items-center gap-4">
                         <div className="flex flex-row justify-between w-full">
-                            <Button className="bg-light-accent dark:bg-dark-accent" type="submit">
+                            <Button className="bg-accent" type="submit">
                                 create
                             </Button>
                             <Link className="flex items-center px-4" href={"/auth/login"}>
-                                <Button className="bg-light-accent dark:bg-dark-accent">
+                                <Button className="bg-accent">
                                     login
                                 </Button>
                             </Link>

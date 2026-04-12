@@ -1,11 +1,3 @@
-export type User = {
-    id: string;
-    username: string;
-    email: string;
-    password?: string;
-    createdAt: Date;
-};
-
 export type Tournament = {
     id: string;
     name: string;

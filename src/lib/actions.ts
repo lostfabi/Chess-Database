@@ -1,7 +1,7 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import type { Game, Tournament, User } from '@/lib/types';
+import type { Game, Tournament } from '@/lib/types';
 import { createGameScheme, createTournamentScheme, registerScheme } from "@/lib/formValidation";
 import { supabase, supabaseAdmin } from '@/lib/db';
 import { createSupabaseServerClient } from '@/lib/supabaseServer';
@@ -51,7 +51,7 @@ export async function getCurrentUser() {
         username: data.user.user_metadata?.username ?? '',
         email: data.user.email ?? '',
         createdAt: new Date(data.user.created_at),
-    } as User
+    }
 }
 
 export async function registerUser(formData: FormData) {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
 
@@ -19,7 +19,7 @@ export default function RootLayout({
         <title>Chess Database</title>
     </head>
       <body className={`antialiased`}>
-        <main className="bg-light-background dark:bg-dark-background">
+        <main className="bg-background text-text">
           {children}
         </main>
       </body>

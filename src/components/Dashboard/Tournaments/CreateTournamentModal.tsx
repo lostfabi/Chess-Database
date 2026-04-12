@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Modal } from '@/components/Modal'
 
@@ -45,7 +45,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
                             type="text"
                             name="name"
                             placeholder="tournament name"
-                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent  outline-none"
                             required
                         />
                     </div>
@@ -56,7 +56,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
                         <input
                             type="date"
                             name="start"
-                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent  outline-none"
                             required
                         />
                     </div>
@@ -68,7 +68,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
                             type="date"
                             name="end"
                             placeholder="(optional)"
-                            className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                            className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent  outline-none"
                         />
                     </div>
                 </div>
@@ -76,13 +76,13 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateT
                     <button
                         type="button"
                         onClick={onCloseAction}
-                        className="px-4 py-2 rounded-lg bg-light-primary dark:bg-dark-primary font-medium"
+                        className="px-4 py-2 rounded-lg bg-primary font-medium"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        className="px-4 py-2 rounded-lg bg-light-secondary dark:bg-dark-secondary font-medium"
+                        className="px-4 py-2 rounded-lg bg-secondary font-medium"
                     >
                         Create Tournament
                     </button>

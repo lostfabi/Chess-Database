@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
@@ -44,14 +44,14 @@ export function Modal({ isOpen, onCloseAction, title, children, size = 'sm' }: M
             <div
                 className={`relative ${sizeClasses[size]}`}
                 onClick={(e) => e.stopPropagation()}>
-                <div className="bg-light-primary/70 dark:bg-dark-primary/70 rounded-lg overflow-hidden p-4">
+                <div className="bg-primary/70 rounded-lg overflow-hidden p-4">
                     <div className="flex items-center justify-between mb-5">
-                        <h2 className="text-xl font-semibold text-light-text dark:text-dark-text">
+                        <h2 className="text-xl font-semibold text-text">
                             {title}
                         </h2>
                         <button
                             onClick={onCloseAction}
-                            className="text-light-text dark:text-dark-text transition-colors p-1 hover:bg-light-primary dark:hover:bg-dark-primary rounded"
+                            className="text-text transition-colors p-1 hover:bg-primary rounded"
                         >
                             <AiOutlineClose />
                         </button>

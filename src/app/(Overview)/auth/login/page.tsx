@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Button } from '@/components/buttons/Button';
 import React, { useActionState } from 'react';
@@ -12,9 +12,9 @@ export default function Login() {
     );
 
     return (
-        <div className="h-screen dark:bg-dark-background text-dark-text dark:text-light-text flex items-center justify-center">
+        <div className="h-screen text-text flex items-center justify-center">
             <form action={formAction} className="w-1/5 space-y-3">
-                <div className="flex flex-col rounded-lg bg-light-primary dark:bg-dark-primary py-8 px-5 gap-5">
+                <div className="flex flex-col rounded-lg bg-primary py-8 px-5 gap-5">
                     <h1 className="flex flex-col items-center text-2xl">
                         Sign in
                     </h1>
@@ -27,7 +27,7 @@ export default function Login() {
                             </label>
                             <div className="relative">
                                 <input
-                                    className="block w-full rounded-md border-2 outline-none dark:border-dark-accent p-2 text-sm placeholder:text-gray-600"
+                                    className="block w-full rounded-md border-2 outline-none p-2 text-sm placeholder:text-gray-600"
                                     id="email"
                                     type="email"
                                     name="email"
@@ -43,7 +43,7 @@ export default function Login() {
                             </label>
                             <div className="relative">
                                 <input
-                                    className="peer block w-full rounded-md border-2 outline-none border-light-secondary dark:border-dark-accent py-2 p-2 text-sm placeholder:text-gray-600"
+                                    className="peer block w-full rounded-md border-2 outline-none border-secondary py-2 p-2 text-sm placeholder:text-gray-600"
                                     id="password"
                                     type="password"
                                     name="password"
@@ -56,11 +56,11 @@ export default function Login() {
                     <input type="hidden" name="redirectTo" value={"/dashboard"} />
                     <div className="flex flex-col justify-center items-center">
                         <div className="flex flex-row justify-between w-full">
-                            <Button className="bg-light-accent dark:bg-dark-accent" aria-disabled={isPending}>
+                            <Button className="bg-accent" aria-disabled={isPending}>
                                 Log in
                             </Button>
                             <Link className="flex items-center px-4" href={"/auth/register"}>
-                                <Button className="bg-light-accent dark:bg-dark-accent">
+                                <Button className="bg-accent">
                                     create account
                                 </Button>
                             </Link>

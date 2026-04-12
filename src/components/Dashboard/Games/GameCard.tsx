@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Game } from "@/lib/types";
 import { Chess } from "chess.js";
@@ -19,7 +19,7 @@ export default function ({ game, tournamentName }: { game: Game, tournamentName:
     return(
         <div>
             <Link href={`/dashboard/Games/${game.id}`}>
-                <div className="bg-light-secondary/40 dark:bg-dark-secondary/40 hover:bg-light-secondary/60 hover:dark:bg-dark-secondary/60 py-2 px-3 rounded-md">
+                <div className="bg-secondary/40 hover:bg-secondary/60 py-2 px-3 rounded-md">
                     <div className="pb-2 font-bold">
                         <p>{tournamentName}</p>
                     </div>

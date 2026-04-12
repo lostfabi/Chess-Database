@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
@@ -20,7 +20,7 @@ export default function EditTournamentPopup({ onOpenChange }: EditTournamentPopu
         return (
             <button
                 type="button"
-                className="hover:bg-dark-secondary/60 p-2 rounded-md"
+                className="hover:bg-secondary/60 p-2 rounded-md"
             >
                 <FaEllipsisV />
             </button>
@@ -37,7 +37,7 @@ export default function EditTournamentPopup({ onOpenChange }: EditTournamentPopu
             trigger={
                 <button
                     type="button"
-                    className="hover:bg-dark-secondary/60 p-2 rounded-md"
+                    className="hover:bg-secondary/60 p-2 rounded-md"
                 >
                     <FaEllipsisV />
                 </button>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react';
 import { Chessboard } from "react-chessboard";
@@ -77,7 +77,7 @@ export default function GameView({ game, tournament }: { game: Game, tournament:
                 <div className="flex flex-col gap-2 items-center">
                     <h2>{tournament.name}</h2>
                     <h3>{date}</h3>
-                    <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 p-2 rounded-md text-sm max-h-2/3 overflow-auto">
+                    <div className="bg-secondary/30 p-2 rounded-md text-sm max-h-2/3 overflow-auto">
                         <p className="whitespace-pre-line">
                             {pgn}
                         </p>
@@ -85,7 +85,7 @@ export default function GameView({ game, tournament }: { game: Game, tournament:
                     <Button onClick={(): boolean => copy(pgn, { debug: true })}>
                         <FaCopy />
                     </Button>
-                    <div className="bg-light-secondary/30 dark:bg-dark-secondary/30 p-2 rounded-md text-sm max-h-1/5 max-w-full overflow-auto">
+                    <div className="bg-secondary/30 p-2 rounded-md text-sm max-h-1/5 max-w-full overflow-auto">
                         <p className="whitespace-pre-line break-words">
                             {currentPosition}
                         </p>

@@ -1,4 +1,4 @@
-import {movesToArray} from "@/lib/helperFunctions";
+﻿import {movesToArray} from "@/lib/helperFunctions";
 
 export default function DisplayMoves({ history, currentMoveIndex }: { history: string[], currentMoveIndex: number }) {
     const moves = movesToArray(history);
@@ -25,7 +25,7 @@ export default function DisplayMoves({ history, currentMoveIndex }: { history: s
                 {whiteMoves.map((move: string, i: number) => (
                     <div
                         key={i}
-                        className={currentMoveIndex === i * 2 ? 'bg-light-accent/40 dark:bg-dark-accent/40 rounded-md px-1' : 'px-1'}
+                        className={currentMoveIndex === i * 2 ? 'bg-accent/40 rounded-md px-1' : 'px-1'}
                     >
                         <span>{move}</span>
                     </div>
@@ -35,7 +35,7 @@ export default function DisplayMoves({ history, currentMoveIndex }: { history: s
                 {blackMoves.map((move: string, i: number) => (
                     <div
                         key={i}
-                        className={currentMoveIndex === i * 2 + 1 ? 'bg-light-accent/40 dark:bg-dark-accent/40 rounded-md px-1' : 'px-1'}
+                        className={currentMoveIndex === i * 2 + 1 ? 'bg-accent/40 rounded-md px-1' : 'px-1'}
                     >
                         <span>{move}</span>
                     </div>

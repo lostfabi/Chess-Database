@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from "next/link";
 import EditTournamentPopup from "@/components/Dashboard/Tournaments/EditTournamentPopup";
@@ -28,11 +28,11 @@ export default function({ tournament, games, state, startDate, endDate }: Tourna
     return(
             <div
                 onClick={handleCardClick}
-                className="bg-light-secondary/30 dark:bg-dark-secondary/30 hover:bg-light-secondary/50 dark:hover:bg-dark-secondary/50 p-3 rounded-md">
+                className="bg-secondary/30 hover:bg-secondary/50 p-3 rounded-md">
                 <div className="flex justify-between items-center mb-3">
                     <h2>{tournament.name}</h2>
                     <div className="flex items-center gap-5">
-                        <p className={`text-light-text p-2 text-xs rounded-sm min-w-1/8 text-center
+                        <p className={`text-text p-2 text-xs rounded-sm min-w-1/8 text-center
                                ${state === 'ongoing' ? 'bg-ongoing/80' :
                             state === 'upcoming' ? 'bg-upcoming/80' : 'bg-completed/80'}`}>{state}
                         </p>

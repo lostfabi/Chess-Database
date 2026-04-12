@@ -1,4 +1,4 @@
-import {FaTrash} from "react-icons/fa";
+﻿import {FaTrash} from "react-icons/fa";
 import {Button} from "@/components/buttons/Button";
 
 export default function DeleteTournamentButton() {
@@ -7,7 +7,7 @@ export default function DeleteTournamentButton() {
     }
 
     return(
-        <div className="bg-dark-accent rounded-md">
+        <div className="bg-accent rounded-md">
             <Button
                 className="flex flex-row gap-2 items-center"
                 onClick={ () => handleClick() }>

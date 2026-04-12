@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Modal } from '@/components/Modal'
 
@@ -91,7 +91,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                                         name="tournament"
                                         multiple={false}
                                         required
-                                        className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none"
+                                        className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent outline-none"
                                     >
                                         {options.map((tournament: Tournament) => (
                                             <option key={tournament.id} value={tournament.name}>
@@ -117,7 +117,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                                 type="date"
                                 name="date"
                                 placeholder="date"
-                                className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                                className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent  outline-none"
                                 required
                             />
                         </div>
@@ -129,7 +129,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                                 type="text"
                                 name="playerWhite"
                                 placeholder="player with white"
-                                className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                                className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent  outline-none"
                                 required
                             />
                         </div>
@@ -141,7 +141,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                                 type="text"
                                 name="playerBlack"
                                 placeholder="white with black"
-                                className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent  outline-none"
+                                className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent  outline-none"
                                 required
                             />
                         </div>
@@ -154,7 +154,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                                 name="result"
                                 multiple={false}
                                 required
-                                className="w-full text-sm italic p-2 rounded-lg bg-light-secondary/80 dark:bg-dark-secondary/80 focus:ring-1 focus:ring-light-accent dark:focus:ring-dark-accent outline-none">
+                                className="w-full text-sm italic p-2 rounded-lg bg-secondary/80 focus:ring-1 focus:ring-accent outline-none">
                                 <option value="1-0">1-0</option>
                                 <option value="0-1">0-1</option>
                                 <option value="1/2-1/2">1/2-1/2</option>
@@ -174,13 +174,13 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
                     <button
                         type="button"
                         onClick={onCloseAction}
-                        className="px-4 py-2 rounded-lg bg-light-secondary dark:bg-dark-secondary font-medium"
+                        className="px-4 py-2 rounded-lg bg-secondary font-medium"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        className="px-4 py-2 rounded-lg bg-light-primary dark:bg-dark-primary font-medium"
+                        className="px-4 py-2 rounded-lg bg-primary font-medium"
                     >
                         Create Game
                     </button>
