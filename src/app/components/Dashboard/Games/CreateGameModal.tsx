@@ -9,6 +9,7 @@ import { CreateTournamentButton } from "@/app/components/Dashboard/Tournaments/C
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import {formatPgnWithHeader} from "@/app/lib/helperFunctions";
+import CustomBoard from "@/app/components/customBoard";
 
 type CreateGameModalProps = {
     isOpen: boolean
@@ -20,7 +21,6 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
     function onDrop({sourceSquare, targetSquare}: {sourceSquare: string, targetSquare: string}) {
         const gameCopy = new Chess(game.fen())
         gameCopy.loadPgn(game.pgn())
-        console.log(game.pgn())
 
         const move = gameCopy.move({
             from: sourceSquare,
@@ -78,7 +78,7 @@ export default function CreateTournamentModal({ isOpen, onCloseAction }: CreateG
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-row gap-5 mb-4">
                     <div className="flex flex-2">
-                        <Chessboard options={{showNotation: true, position: game.fen(), onPieceDrop: onDrop as any}}/>
+                        <CustomBoard options={{ position: game.fen(), onPieceDrop: onDrop }}/>
                     </div>
                     <div className="space-y-4 mb-8 flex-1">
                         <div>

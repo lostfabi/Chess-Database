@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/app/lib/actions";
 import "../../globals.css";
-import TournamentList from "../../components/Dashboard/Tournaments/TournamentList"
+import TournamentList from "@/app/components/Dashboard/Tournaments/TournamentList"
 import DashboardGameList from "@/app/components/Dashboard/DashboardGameList";
 
 export const dynamic = 'force-dynamic'
@@ -10,7 +10,7 @@ export default async function Dashboard() {
     if(!user) return <h1>please login</h1>
 
     return(
-        <div>
+        <>
             <h1 className="mb-8">Dashboard</h1>
             <div className="flex flex-row gap-10">
                 <div className="flex-1">
@@ -22,6 +22,6 @@ export default async function Dashboard() {
                     <DashboardGameList />
                 </div>
             </div>
-        </div>
+        </>
     )
 }

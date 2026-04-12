@@ -13,7 +13,7 @@ export default async function() {
     )
 
     return(
-        <div>
+        <>
             <div className="flex flex-row justify-between content-center mb-5">
                 <h1>My Games</h1>
                 <CreateGameButton />
@@ -26,6 +26,6 @@ export default async function() {
                         tournamentName={tournaments[index].name}/>
                 ))}
             </div>
-        </div>
+        </>
     )
 }

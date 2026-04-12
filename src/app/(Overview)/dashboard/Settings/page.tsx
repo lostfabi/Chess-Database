@@ -5,8 +5,8 @@ export default async function SettingsPage() {
     if(!user) return <h1>please login</h1>
 
     return (
-        <div>
+        <>
             <h1>Settings</h1>
-        </div>
+        </>
     )
 }

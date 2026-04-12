@@ -54,10 +54,13 @@ export async function registerUser(formData: FormData) {
     const validated = registerScheme.safeParse({
         username: formData.get('username'),
         email: formData.get('email'),
-        password: formData.get('password')
+        password: formData.get('password'),
+        confirmPassword: formData.get('confirmPassword')
     })
 
-    if (!validated.success) return { error: "validation error" }
+    if (!validated.success) {
+        return {error : validated.error.issues[0].message}
+    }
 
     const { username, email, password } = validated.data
 
@@ -72,7 +75,6 @@ export async function registerUser(formData: FormData) {
         })
 
     if (error) {
-        console.error('Registration error:', error)
         return { error: 'registration failed' }
     }
 
@@ -90,7 +92,6 @@ export async function getUserGames() {
         .order('date', { ascending: false })
 
     if (error) {
-        console.error('Error fetching games:', error)
         throw new Error(`games from user: ${userId} not found`)
     }
 

@@ -11,7 +11,7 @@ export default async function() {
     if(!user) return <h1>please login</h1>
 
     return(
-        <div>
+        <>
             <div className="flex flex-row justify-between content-center mb-5">
                 <h1>My Tournaments</h1>
                 <CreateTournamentButton />
@@ -21,6 +21,6 @@ export default async function() {
                     <TournamentCard key={t.id} tournament={t} />
                 ))}
             </div>
-        </div>
+        </>
     )
 }

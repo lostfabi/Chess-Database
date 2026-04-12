@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {FaChessBoard, FaTrophy} from "react-icons/fa";
+import {FaBookOpen, FaChessBoard, FaTrophy} from "react-icons/fa";
 import {MdSettings} from "react-icons/md";
 
 export default function () {
@@ -21,6 +21,12 @@ export default function () {
                 <Link className="flex justify-between items-center" href={"/dashboard/Settings"}>
                     Settings
                     <MdSettings />
+                </Link>
+            </div>
+            <div className="bg-light-primary/50 dark:bg-dark-primary/50 hover:bg-light-primary/80 dark:hover:bg-dark-primary/80 p-3 rounded-md">
+                <Link className="flex justify-between items-center" href={"/dashboard/Analysis"}>
+                    Analysis
+                    <FaBookOpen />
                 </Link>
             </div>
         </div>
