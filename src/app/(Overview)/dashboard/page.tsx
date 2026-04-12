@@ -1,7 +1,7 @@
-import { getCurrentUser } from "@/app/lib/actions";
+import { getCurrentUser } from "@/lib/actions";
 import "../../globals.css";
-import TournamentList from "@/app/components/Dashboard/Tournaments/TournamentList"
-import DashboardGameList from "@/app/components/Dashboard/DashboardGameList";
+import TournamentList from "@/components/Dashboard/Tournaments/TournamentList"
+import DashboardGameList from "@/components/Dashboard/DashboardGameList";
 
 export const dynamic = 'force-dynamic'
 

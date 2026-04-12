@@ -1,4 +1,4 @@
-import {getCurrentUser} from "@/app/lib/actions";
+import {getCurrentUser} from "@/lib/actions";
 
 export default async function SettingsPage() {
     const user = await getCurrentUser()

@@ -1,6 +1,6 @@
-import { getTournamentById } from "@/app/lib/actions";
-import { Tournament } from "@/app/lib/definitions";
-import TournamentGameList from "@/app/components/Dashboard/Tournaments/TournamentGameList";
+import { getTournamentById } from "@/lib/actions";
+import { Tournament } from "@/lib/types";
+import TournamentGameList from "@/components/Dashboard/Tournaments/TournamentGameList";
 
 export default  async function TournamentPage({ params }: {params: Promise<{ tournamentId: number }>}) {
     const { tournamentId } = await params

@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/app/components/buttons/Button';
+import { Button } from '@/components/buttons/Button';
 import React, { useActionState } from 'react';
-import { authenticate } from '@/app/lib/actions';
+import { authenticate } from '@/lib/actions';
 import Link from "next/link";
 
 export default function Login() {

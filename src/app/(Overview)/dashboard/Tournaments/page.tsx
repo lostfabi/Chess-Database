@@ -1,7 +1,7 @@
-import { getCurrentUser, getAllUserTournaments } from "@/app/lib/actions";
-import TournamentCard from "@/app/components/Dashboard/Tournaments/TournamentCard";
-import {CreateTournamentButton} from "@/app/components/Dashboard/Tournaments/CreateTournamentButton";
-import {Tournament} from "@/app/lib/definitions";
+import { getCurrentUser, getAllUserTournaments } from "@/lib/actions";
+import TournamentCard from "@/components/Dashboard/Tournaments/TournamentCard";
+import {CreateTournamentButton} from "@/components/Dashboard/Tournaments/CreateTournamentButton";
+import {Tournament} from "@/lib/types";
 
 export const dynamic = 'force-dynamic'
 

@@ -1,5 +1,5 @@
-import {getCurrentUser} from "@/app/lib/actions";
-import AnalysisBoard from "@/app/components/Dashboard/Analysis/Analysisboard";
+import {getCurrentUser} from "@/lib/actions";
+import AnalysisBoard from "@/components/Dashboard/Analysis/Analysisboard";
 
 export default async function AnalysisPage() {
     const user = await getCurrentUser()

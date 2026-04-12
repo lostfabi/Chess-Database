@@ -1,7 +1,7 @@
-import {getGameById, getTournamentNameFromGameId} from "@/app/lib/actions";
+import {getGameById, getTournamentNameFromGameId} from "@/lib/actions";
 import {notFound} from "next/navigation";
-import GameView from "@/app/components/Dashboard/Games/GameView";
-import {Game, Tournament} from "@/app/lib/definitions";
+import GameView from "@/components/Dashboard/Games/GameView";
+import {Game, Tournament} from "@/lib/types";
 
 export default async function GamePage({ params }: {params: Promise<{ gameId: string }>}) {
     const { gameId } = await params

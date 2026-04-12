@@ -1,10 +1,10 @@
 'use client'
 
-import {Button} from "@/app/components/buttons/Button";
+import {Button} from "@/components/buttons/Button";
 import Link from "next/link";
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
-import {registerUser} from "@/app/lib/actions";
+import {registerUser} from "@/lib/actions";
 
 export default function RegisterPage() {
     const [error, setError] = useState('')
