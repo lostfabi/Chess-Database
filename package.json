@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint .",
+    "format-check": "prettier --check ."
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
