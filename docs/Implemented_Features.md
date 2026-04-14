@@ -1,3 +1,8 @@
+---
+title: Implemented Features
+nav_order: 2
+---
+
 # Implemented Features
 
 ## Authentication

@@ -1,0 +1,10 @@
+title: Chess Database
+description: A personal chess management app to track your tournaments and games.
+theme: just-the-docs
+
+url: "https://lostfabi.github.io"
+baseurl: "/Chess-Database"
+
+aux_links:
+  GitHub:
+    - "https://github.com/lostfabi/Chess-Database"

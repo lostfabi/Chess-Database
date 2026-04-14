@@ -1,3 +1,8 @@
+---
+title: Planned Features
+nav_order: 4
+---
+
 # Planned Features
 
 ## Club Management

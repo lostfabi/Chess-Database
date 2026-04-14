@@ -1,3 +1,8 @@
+---
+title: In Progress
+nav_order: 3
+---
+
 # In Progress
 
 ## Tournament Filter on Dashboard
