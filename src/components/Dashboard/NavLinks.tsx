@@ -18,15 +18,15 @@ export default function () {
                 </Link>
             </div>
             <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
-                <Link className="flex justify-between items-center" href={"/dashboard/Settings"}>
-                    Settings
-                    <MdSettings />
-                </Link>
-            </div>
-            <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
                 <Link className="flex justify-between items-center" href={"/dashboard/Analysis"}>
                     Analysis
                     <FaBookOpen />
+                </Link>
+            </div>
+            <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
+                <Link className="flex justify-between items-center" href={"/dashboard/Settings"}>
+                    Settings
+                    <MdSettings />
                 </Link>
             </div>
         </div>

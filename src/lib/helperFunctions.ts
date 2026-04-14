@@ -8,17 +8,6 @@ export function formatDateToString(date: Date){
     }).toString()
 }
 
-export function getOngoingTournaments(tournaments: Tournament[]) {
-    let ongoingTournaments = []
-    for(let i = 0; i < tournaments.length; i++) {
-        let state = getTournamentState(tournaments[i])
-        if(state === 'ongoing') {
-            ongoingTournaments.push(tournaments[i])
-        }
-    }
-    return ongoingTournaments
-}
-
 export function splitResult(result: string) {
     const split: string[] = result.split("-")
     return {
@@ -39,6 +28,10 @@ export function getTournamentState(tournament: Tournament): TournamentState {
     } else {
         return 'completed';
     }
+}
+
+export function filterTournaments(state: TournamentState, tournaments: Tournament[]): Tournament[] {
+    return tournaments.filter((t) => getTournamentState(t))
 }
 
 export function movesToArray(history: string[]) {

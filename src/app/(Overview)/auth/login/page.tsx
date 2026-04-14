@@ -12,7 +12,7 @@ export default function Login() {
     );
 
     return (
-        <div className="h-screen text-text flex items-center justify-center">
+        <div className="h-screen text-text-dark flex items-center justify-center">
             <form action={formAction} className="w-1/5 space-y-3">
                 <div className="flex flex-col rounded-lg bg-primary py-8 px-5 gap-5">
                     <h1 className="flex flex-col items-center text-2xl">
