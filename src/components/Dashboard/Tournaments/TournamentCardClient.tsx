@@ -1,6 +1,4 @@
 ﻿'use client'
-
-import Link from "next/link";
 import EditTournamentPopup from "@/components/Dashboard/Tournaments/EditTournamentPopup";
 import {Game, Tournament, TournamentState} from "@/lib/types";
 import {useRouter} from "next/navigation";
