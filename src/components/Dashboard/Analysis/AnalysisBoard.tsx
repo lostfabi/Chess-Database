@@ -1,6 +1,6 @@
 import CustomBoard from "@/components/customBoard";
 
-export default function Analysisboard () {
+export default function AnalysisBoard () {
     return(
         <>
             <CustomBoard />
