@@ -31,7 +31,7 @@ export function getTournamentState(tournament: Tournament): TournamentState {
 }
 
 export function filterTournaments(state: TournamentState, tournaments: Tournament[]): Tournament[] {
-    return tournaments.filter((t) => getTournamentState(t))
+    return tournaments.filter((t) => getTournamentState(t) === state)
 }
 
 export function movesToArray(history: string[]) {

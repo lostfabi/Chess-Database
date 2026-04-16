@@ -26,3 +26,8 @@ nav_order: 2
 
 ## Analysis Board
 - Interactive board for free analysis
+
+## Quick Links
+
+- [In Progress](In_Progress)
+- [Planned Features](Planed_Features)

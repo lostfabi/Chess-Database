@@ -26,3 +26,8 @@ nav_order: 4
 
 ## Landing Page
 - Redesigned, visually appealing landing page
+
+## Quick Links
+
+- [Implemented Features](Implemented_Features)
+- [In Progress](In_Progress)
