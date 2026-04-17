@@ -1,9 +1,11 @@
 {
-  "name": "untitled",
+  "name": "chessave",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "scripts": {
     "dev": "next dev --turbopack",
+    "electron": "next dev --turbopack && electron .",
     "build": "next build --turbopack",
     "start": "next start"
   },
@@ -13,6 +15,7 @@
     "bcrypt": "^6.0.0",
     "chess.js": "^1.4.0",
     "copy-to-clipboard": "^3.3.3",
+    "electron": "^41.2.1",
     "eslint": "^10.2.0",
     "next": "16.2.3",
     "next-auth": "5.0.0-beta.30",
