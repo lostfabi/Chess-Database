@@ -16,7 +16,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
     return (
         <>
             <h1 className="mb-8">Dashboard</h1>
-            <div className="flex flex-row gap-10">
+            <div className="flex flex-row gap-5">
                 <div className="flex-1">
                     <div className="mb-5 flex flex-row justify-between">
                         <h2>My Tournaments</h2>

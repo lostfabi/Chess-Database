@@ -8,7 +8,7 @@ export default function SideBar() {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
-        <div className={`flex h-full flex-col px-3 py-4 md:px-2 transition-all duration-200 ${isOpen ? 'w-80' : 'w-fit'}`}>
+        <div className={`flex h-full flex-col py-4 md:px-2 transition-all duration-200 ${isOpen ? 'w-80' : 'w-fit'}`}>
             {isOpen
                 ? <NavLinks onToggle={() => setIsOpen(false)} />
                 : <NavLinksCollapsed onToggle={() => setIsOpen(true)} />

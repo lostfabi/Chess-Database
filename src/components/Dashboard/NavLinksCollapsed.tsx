@@ -3,6 +3,7 @@ import {FaAngleRight, FaBookOpen, FaChessBoard, FaSignOutAlt, FaTrophy} from "re
 import {MdSettings} from "react-icons/md";
 import Logo from "@/components/Dashboard/Logo";
 import {signOutUser} from "@/lib/actions";
+import {RiTeamFill} from "react-icons/ri";
 
 export default function ({ onToggle }: { onToggle: () => void }) {
     const iconSize = 30;
@@ -36,6 +37,11 @@ export default function ({ onToggle }: { onToggle: () => void }) {
                         <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
                             <Link className="flex justify-between items-center" href={"/dashboard/Analysis"}>
                                 <FaBookOpen size={iconSize}/>
+                            </Link>
+                        </div>
+                        <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
+                            <Link className="flex justify-between items-center" href={"/dashboard/Clubs"}>
+                                <RiTeamFill size={iconSize}/>
                             </Link>
                         </div>
                         <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">

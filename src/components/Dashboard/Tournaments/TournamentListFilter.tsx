@@ -2,6 +2,7 @@
 
 import {useRouter, useSearchParams} from "next/navigation";
 import {TournamentState} from "@/lib/types";
+import React from "react";
 
 export default function TournamentListFilter({ current }: { current: TournamentState }) {
     const router = useRouter()
