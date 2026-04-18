@@ -1,21 +1,23 @@
-﻿import Link from "next/link";
-import {FaAngleLeft, FaBookOpen, FaChessBoard, FaSignOutAlt, FaTrophy} from "react-icons/fa";
+import Link from "next/link";
+import {FaAngleRight, FaBookOpen, FaChessBoard, FaSignOutAlt, FaTrophy} from "react-icons/fa";
 import {MdSettings} from "react-icons/md";
 import Logo from "@/components/Dashboard/Logo";
 import {signOutUser} from "@/lib/actions";
 
 export default function ({ onToggle }: { onToggle: () => void }) {
+    const iconSize = 30;
+
     return(
         <>
-            <div className="relative mb-2 flex h-50 items-center justify-center rounded-md bg-secondary/50 p-2 md:h-50">
+            <div className="relative mb-2 flex rounded-md bg-secondary/50 p-2 pt-6 md:h-fit">
                 <Link className="w-full h-full" href="/dashboard">
-                    <Logo className="w-full h-full"/>
+                    <Logo className='w-${iconSize}'/>
                 </Link>
                 <button
                     onClick={e => { e.stopPropagation(); onToggle(); }}
                     className="absolute top-0 left-0 p-1"
                 >
-                    <FaAngleLeft size={20} />
+                    <FaAngleRight size={20} />
                 </button>
             </div>
             <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
@@ -23,35 +25,30 @@ export default function ({ onToggle }: { onToggle: () => void }) {
                     <div className="flex flex-col m-2 gap-2 text-xl">
                         <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
                             <Link className="flex justify-between items-center" href={"/dashboard/Tournaments"}>
-                                Tournaments
-                                <FaTrophy />
+                                <FaTrophy size={iconSize}/>
                             </Link>
                         </div>
                         <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
                             <Link className="flex justify-between items-center" href={"/dashboard/Games"}>
-                                Games
-                                <FaChessBoard />
+                                <FaChessBoard size={iconSize}/>
                             </Link>
                         </div>
                         <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
                             <Link className="flex justify-between items-center" href={"/dashboard/Analysis"}>
-                                Analysis
-                                <FaBookOpen />
+                                <FaBookOpen size={iconSize}/>
                             </Link>
                         </div>
                         <div className="bg-primary/50 hover:bg-primary/80 p-3 rounded-md">
                             <Link className="flex justify-between items-center" href={"/dashboard/Settings"}>
-                                Settings
-                                <MdSettings />
+                                <MdSettings size={iconSize}/>
                             </Link>
                         </div>
                     </div>
                 </div>
                 <form action={signOutUser}>
-                    <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium md:flex-none md:justify-between
+                    <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium md:flex-none
                                         bg-primary/60 hover:bg-primary/80">
-                        <div className="hidden md:block">Sign Out</div>
-                        <FaSignOutAlt />
+                        <FaSignOutAlt size={iconSize-10}/>
                     </button>
                 </form>
             </div>

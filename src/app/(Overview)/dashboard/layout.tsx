@@ -4,7 +4,7 @@ import React from "react";
 export default function DashboardLayout({children}: {children: React.ReactNode}) {
     return(
         <div className="flex h-screen">
-            <div className="h-screen md:w-80">
+            <div className="h-screen shrink-0">
                 <SideBar></SideBar>
             </div>
             <div className="flex-1 overflow-auto p-5">
