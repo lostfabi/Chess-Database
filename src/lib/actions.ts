@@ -85,6 +85,7 @@ export async function registerUser(formData: FormData) {
 }
 
 export async function getUserGames() {
+    const supabase = await createSupabaseServerClient()
     const userId = await getSession()
     if (!userId) return []
 
@@ -102,6 +103,7 @@ export async function getUserGames() {
 }
 
 export async function getGameById(id: string) {
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase
         .from('Game')
         .select('*')
@@ -117,6 +119,7 @@ export async function getGameById(id: string) {
 }
 
 export async function getGamesFromTournament(tournament: Tournament) {
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase
         .from('Game')
         .select('*')
@@ -157,6 +160,7 @@ export async function createGame(formData: FormData) {
 
     const { tournamentId, result, pgn, date, playerWhite, playerBlack } = validated.data
 
+    const supabase = await createSupabaseServerClient()
     const { error } = await supabase
         .from('Game')
         .insert({
@@ -178,6 +182,7 @@ export async function createGame(formData: FormData) {
 }
 
 export async function deleteGame(gameId: string) {
+    const supabase = await createSupabaseServerClient()
     return supabase
         .from('Game')
         .delete()
@@ -185,6 +190,7 @@ export async function deleteGame(gameId: string) {
 }
 
 export async function getTournamentById(id: number): Promise<Tournament> {
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase
         .from('Tournament')
         .select('*')
@@ -200,6 +206,7 @@ export async function getTournamentById(id: number): Promise<Tournament> {
 }
 
 export async function getTournamentByName(name: string): Promise<Tournament> {
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase
         .from('Tournament')
         .select('*')
@@ -214,6 +221,7 @@ export async function getTournamentByName(name: string): Promise<Tournament> {
 }
 
 export async function getLatestTournaments() {
+    const supabase = await createSupabaseServerClient()
     const userId = await getSession()
     if (!userId) return []
 
@@ -232,6 +240,7 @@ export async function getLatestTournaments() {
 }
 
 export async function getAllUserTournaments() {
+    const supabase = await createSupabaseServerClient()
     const userId = await getSession()
     if (!userId) return []
 
@@ -250,6 +259,7 @@ export async function getAllUserTournaments() {
 }
 
 export async function getTournamentNameFromGameId(game: Game) {
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase
         .from('Tournament')
         .select('name')
@@ -283,6 +293,7 @@ export async function createTournament(formData: FormData) {
 
     console.log('Creating tournament:', { name, startDate, endDate, userId })
 
+    const supabase = await createSupabaseServerClient()
     const { error } = await supabase
         .from('Tournament')
         .insert({
@@ -302,6 +313,7 @@ export async function createTournament(formData: FormData) {
 }
 
 export async function deleteTournament(tournament: Tournament) {
+    const supabase = await createSupabaseServerClient()
     return supabase
         .from('Tournament')
         .delete()
