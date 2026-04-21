@@ -7,7 +7,7 @@ export default function DashboardLayout({children}: {children: React.ReactNode})
             <div className="h-screen shrink-0">
                 <SideBar></SideBar>
             </div>
-            <div className="flex-1 overflow-auto py-5 px-3">
+            <div className="flex-1 overflow-auto h-full py-5 px-3">
                 {children}
             </div>
         </div>

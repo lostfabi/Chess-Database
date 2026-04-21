@@ -1,21 +1,23 @@
-﻿'use client'
+'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { Chessboard } from "react-chessboard";
-import { Game, Tournament } from "@/lib/types";
+import { Game } from "@/lib/types";
 import { Chess } from "chess.js";
 import DisplayMoves from "./DisplayMoves";
-import { formatDateToString, splitResult } from "@/lib/helperFunctions";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight, FaCopy } from "react-icons/fa";
 import { Button } from "../../buttons/Button";
 import copy from "copy-to-clipboard";
+import { useRouter } from "next/navigation";
 
-export default function GameView({ game, tournament }: { game: Game, tournament: Tournament }) {
+export default function GameView({ game }: { game: Game }) {
     const pgn = game.pgn
 
     const [currentPosition, setCurrentPosition] = useState(new Chess().fen());
     const [moves, setMoves] = useState<string[]>([]);
     const [currentMoveIndex, setCurrentMoveIndex] = useState(-1);
+    const [boardSize, setBoardSize] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
         const newGame = new Chess()
@@ -59,62 +61,63 @@ export default function GameView({ game, tournament }: { game: Game, tournament:
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [currentMoveIndex, moves.length]);
 
+    useLayoutEffect(() => {
+        const update = () => setBoardSize(window.innerHeight - 40); // 40px = py-5 (20px top + 20px bottom)
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    }, []);
+
     const goToStart = () => setCurrentMoveIndex(-1);
     const goToPreviousMove = () => setCurrentMoveIndex(Math.max(-1, currentMoveIndex - 1));
     const goToNextMove = () => setCurrentMoveIndex(Math.min(moves.length - 1, currentMoveIndex + 1));
     const goToEnd = () => setCurrentMoveIndex(moves.length - 1);
 
-    const date: string = formatDateToString(game.date)
-    const scores = splitResult(game.result)
-
     return(
-        <div className="max-h-full flex flex-row gap-4 w-full">
-            <div className="flex flex-col space-y-2 justify-between w-2/9">
-                <div className="flex flex-col">
-                    <h2 className="self-end">{game.playerBlack}</h2>
-                    <h2 className="self-end">{scores.black}</h2>
-                </div>
-                <div className="flex flex-col gap-2 items-center">
-                    <h2>{tournament.name}</h2>
-                    <h3>{date}</h3>
-                    <div className="bg-secondary/30 p-2 rounded-md text-sm max-h-2/3 overflow-auto">
-                        <p className="whitespace-pre-line">
-                            {pgn}
-                        </p>
+        <div className="flex flex-row gap-4 w-full h-full">
+            <div className="flex flex-col shrink-0 space-y-2">
+                <div className="flex flex-col w-fit h-full gap-2 items-center justify-between">
+                    <div className="flex flex-row gap-2 items-center">
+                        <div className="flex flex-col gap-3.5 items-center">
+                            <span>Copy PGN</span>
+                            <span>Copy FEN</span>
+                        </div>
+                            <div className="flex flex-col gap-2 items-center">
+                                <Button onClick={(): boolean => copy(currentPosition, { debug: true})}>
+                                    <div>
+                                        <FaCopy />
+                                    </div>
+                                </Button>
+                                <Button onClick={(): boolean => copy(pgn, { debug: true })}>
+                                    <div>
+                                        <FaCopy />
+                                    </div>
+                                </Button>
+                            </div>
                     </div>
-                    <Button onClick={(): boolean => copy(pgn, { debug: true })}>
-                        <FaCopy />
-                    </Button>
-                    <div className="bg-secondary/30 p-2 rounded-md text-sm max-h-1/5 max-w-full overflow-auto">
-                        <p className="whitespace-pre-line break-words">
-                            {currentPosition}
-                        </p>
+                    <div>
+                        <Button onClick={() => router.push('/dashboard/Analysis')}>
+                            Analyze
+                        </Button>
                     </div>
-                    <Button onClick={(): boolean => copy(currentPosition, { debug: true})}>
-                        <FaCopy />
-                    </Button>
-                </div>
-                <div className="flex flex-col self-end">
-                    <h2 className="self-end">{game.playerWhite}</h2>
-                    <h2 className="self-end">{scores.white}</h2>
                 </div>
             </div>
-            <div className="h-full flex-col">
-                <div className="aspect-square h-full max-h-full">
-                    <Chessboard options={{ position: currentPosition }}
-                    />
-                </div>
+            <div className="flex items-center shrink-0">
+                {boardSize > 0 && (
+                    <div style={{ width: boardSize, height: boardSize }}>
+                        <Chessboard options={{ position: currentPosition }}/>
+                    </div>
+                )}
             </div>
-            <div className="flex-1 h-full flex flex-col justify-between">
-                <div className="flex overflow-auto">
+            <div className="flex-1 min-w-fit flex flex-col justify-between">
+                <div className="flex overflow-auto mb-2 p-2 justify-start border-2 border-secondary/40 rounded-md h-full">
                     <DisplayMoves history={moves} currentMoveIndex={currentMoveIndex} />
                 </div>
                 <div className="flex justify-center gap-2">
                     <Button
                         onClick={goToStart}
                         className="disabled:opacity-50"
-                        disabled={currentMoveIndex === -1}
-                        title="Zum Anfang">
+                        disabled={currentMoveIndex === -1}>
                         <FaAngleDoubleLeft />
                     </Button>
                     <Button

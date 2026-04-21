@@ -13,7 +13,7 @@ export default function DisplayMoves({ history, currentMoveIndex }: { history: s
     }
 
     return (
-        <div className="flex flex-row space-x-2 text-lg">
+        <div className="flex flex-row space-x-2 text-md">
             <div>
                 {indexes.map((e: string, i: number) => (
                     <div key={i}>
