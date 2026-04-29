@@ -59,3 +59,23 @@ export function formatPgnWithHeader(history: string[], header: string): string {
 
     return `${header}\n\n${moves}`
 }
+
+export function getCommentsFromPGN(pgn: string): Record<number, string> {
+    const result: Record<number, string> = {};
+    const commentPattern = /\{([^}]*)}/g;
+    const moveNumberPattern = /\d+\./g;
+
+    let match;
+    while ((match = commentPattern.exec(pgn)) !== null) {
+        const comment = match[1].trim();
+        const before = pgn.slice(0, match.index);
+
+        const moveMatches = [...before.matchAll(moveNumberPattern)];
+        if (moveMatches.length === 0) continue;
+
+        const move = parseInt(moveMatches[moveMatches.length - 1][0]);
+        result[move] = comment;
+    }
+
+    return result;
+}

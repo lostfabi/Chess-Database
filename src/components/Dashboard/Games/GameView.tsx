@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useLayoutEffect } from 'react';
-import { Chessboard } from "react-chessboard";
 import { Game } from "@/lib/types";
 import { Chess } from "chess.js";
 import DisplayMoves from "./DisplayMoves";
@@ -9,6 +8,7 @@ import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight, FaCop
 import { Button } from "../../buttons/Button";
 import copy from "copy-to-clipboard";
 import { useRouter } from "next/navigation";
+import CustomBoard from "@/components/customBoard";
 
 export default function GameView({ game }: { game: Game }) {
     const pgn = game.pgn
@@ -17,6 +17,8 @@ export default function GameView({ game }: { game: Game }) {
     const [moves, setMoves] = useState<string[]>([]);
     const [currentMoveIndex, setCurrentMoveIndex] = useState(-1);
     const [boardSize, setBoardSize] = useState(0);
+    const [showAnnotations, setShowAnnotations] = useState(false);
+    const [showVariants, setShowVariants] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -95,7 +97,23 @@ export default function GameView({ game }: { game: Game }) {
                                 </Button>
                             </div>
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-2 items-center">
+                        <div className="flex flex-col gap-1 items-center mb-5">
+                            <span>Show Comments</span>
+                            <button
+                                onClick={() => setShowAnnotations(prev => !prev)}
+                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showAnnotations ? 'bg-accent' : 'bg-secondary/30'}`}
+                            >
+                                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showAnnotations ? 'translate-x-6' : 'translate-x-1'}`} />
+                            </button>
+                            <span>Show Sidelines</span>
+                            <button
+                                onClick={() => setShowVariants(prev => !prev)}
+                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showVariants ? 'bg-accent' : 'bg-secondary/30'}`}
+                            >
+                                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showVariants ? 'translate-x-6' : 'translate-x-1'}`} />
+                            </button>
+                        </div>
                         <Button onClick={() => router.push('/dashboard/Analysis')}>
                             Analyze
                         </Button>
@@ -105,13 +123,13 @@ export default function GameView({ game }: { game: Game }) {
             <div className="flex items-center shrink-0">
                 {boardSize > 0 && (
                     <div style={{ width: boardSize, height: boardSize }}>
-                        <Chessboard options={{ position: currentPosition }}/>
+                        <CustomBoard options={{ position: currentPosition }}/>
                     </div>
                 )}
             </div>
             <div className="flex-1 min-w-fit flex flex-col justify-between">
                 <div className="flex overflow-auto mb-2 p-2 justify-start border-2 border-secondary/40 rounded-md h-full">
-                    <DisplayMoves history={moves} currentMoveIndex={currentMoveIndex} />
+                    <DisplayMoves history={moves} currentMoveIndex={currentMoveIndex} showAnnotations={showAnnotations} pgn={pgn} />
                 </div>
                 <div className="flex justify-center gap-2">
                     <Button

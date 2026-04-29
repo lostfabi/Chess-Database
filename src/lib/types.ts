@@ -28,3 +28,8 @@ export type Move = {
 export type MoveArray = Move[]
 
 export type TournamentState = 'upcoming' | 'ongoing' | 'completed'
+
+export type PgnComment = {
+    move: string;
+    comment: string;
+}
