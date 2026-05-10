@@ -20,16 +20,17 @@ export type Game = {
 };
 
 export type Move = {
-    move: string;
-    white: string;
+    moveIndex: string;
+    white?: string;
     black?: string;
+    childMoves?: MoveArray[];
+    comment?: string;
 }
 
 export type MoveArray = Move[]
 
-export type TournamentState = 'upcoming' | 'ongoing' | 'completed'
-
-export type PgnComment = {
-    move: string;
-    comment: string;
+export type PgnObject = {
+    moves: MoveArray;
 }
+
+export type TournamentState = 'upcoming' | 'ongoing' | 'completed'

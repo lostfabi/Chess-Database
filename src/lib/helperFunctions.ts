@@ -1,4 +1,4 @@
-import {MoveArray, Tournament, TournamentState} from "@/lib/types";
+import {Move, MoveArray, Tournament, TournamentState} from "@/lib/types";
 
 export function formatDateToString(date: Date){
     return new Date(date).toLocaleDateString('de-DE', {
@@ -40,42 +40,11 @@ export function movesToArray(history: string[]) {
         const blackMove: string = history[i + 1]
 
         moveArray.push({
-            move: (i / 2 + 1).toString(),
+            moveIndex: (i / 2 + 1).toString(),
             white: history[i],
             ...(blackMove ? { black: blackMove } : {})
         })
     }
 
     return moveArray
-}
-
-export function formatPgnWithHeader(history: string[], header: string): string {
-    const moves = history.reduce((acc, move, i) => {
-        if(i % 2 === 0) {
-            return acc + `${Math.floor(i / 2) + 1}. ${move} `
-        }
-        return acc + `${move} `
-    }, '').trim()
-
-    return `${header}\n\n${moves}`
-}
-
-export function getCommentsFromPGN(pgn: string): Record<number, string> {
-    const result: Record<number, string> = {};
-    const commentPattern = /\{([^}]*)}/g;
-    const moveNumberPattern = /\d+\./g;
-
-    let match;
-    while ((match = commentPattern.exec(pgn)) !== null) {
-        const comment = match[1].trim();
-        const before = pgn.slice(0, match.index);
-
-        const moveMatches = [...before.matchAll(moveNumberPattern)];
-        if (moveMatches.length === 0) continue;
-
-        const move = parseInt(moveMatches[moveMatches.length - 1][0]);
-        result[move] = comment;
-    }
-
-    return result;
 }

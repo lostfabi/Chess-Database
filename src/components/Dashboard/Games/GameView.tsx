@@ -18,7 +18,7 @@ export default function GameView({ game }: { game: Game }) {
     const [currentMoveIndex, setCurrentMoveIndex] = useState(-1);
     const [boardSize, setBoardSize] = useState(0);
     const [showAnnotations, setShowAnnotations] = useState(false);
-    const [showVariants, setShowVariants] = useState(false);
+    const [showVariants, setshowVariants] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -108,7 +108,7 @@ export default function GameView({ game }: { game: Game }) {
                             </button>
                             <span>Show Sidelines</span>
                             <button
-                                onClick={() => setShowVariants(prev => !prev)}
+                                onClick={() => setshowVariants(prev => !prev)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showVariants ? 'bg-accent' : 'bg-secondary/30'}`}
                             >
                                 <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showVariants ? 'translate-x-6' : 'translate-x-1'}`} />
@@ -129,7 +129,7 @@ export default function GameView({ game }: { game: Game }) {
             </div>
             <div className="flex-1 min-w-fit flex flex-col justify-between">
                 <div className="flex overflow-auto mb-2 p-2 justify-start border-2 border-secondary/40 rounded-md h-full">
-                    <DisplayMoves history={moves} currentMoveIndex={currentMoveIndex} showAnnotations={showAnnotations} pgn={pgn} />
+                    <DisplayMoves currentMoveIndex={currentMoveIndex} showAnnotations={showAnnotations} pgn={pgn} showSidelines={showVariants}/>
                 </div>
                 <div className="flex justify-center gap-2">
                     <Button

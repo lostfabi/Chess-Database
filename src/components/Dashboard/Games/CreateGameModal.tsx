@@ -1,13 +1,12 @@
 ﻿'use client'
 
 import { Modal } from '@/components/Modal'
-
 import React, { useEffect, useState } from 'react'
 import { createGame, getAllUserTournaments } from "@/lib/actions";
 import { Tournament } from "@/lib/types";
 import { CreateTournamentButton } from "@/components/Dashboard/Tournaments/CreateTournamentButton";
 import { Chess } from "chess.js";
-import {formatPgnWithHeader} from "@/lib/helperFunctions";
+import { formatPgnWithHeader } from "@/lib/pgnParser";
 import CustomBoard from "@/components/customBoard";
 
 type CreateGameModalProps = {

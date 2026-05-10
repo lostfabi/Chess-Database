@@ -1,70 +1,77 @@
-import {getCommentsFromPGN, movesToArray} from "@/lib/helperFunctions";
+import { MoveArray } from "@/lib/types";
+import { parsePgn } from "@/lib/pgnParser";
 
-export default function DisplayMoves({
-    history,
-    currentMoveIndex,
-    showAnnotations,
-    pgn,
-}: {
-    history: string[];
-    currentMoveIndex: number;
-    showAnnotations?: boolean;
-    pgn: string;
-}) {
+function formatVariantMoves(moves: MoveArray): string {
+    return moves.map(move => {
+        if (!move.white && move.black) {
+            return `${move.moveIndex}... ${move.black}`;
+        }
+        const white = `${move.moveIndex}. ${move.white ?? ''}`;
+        return move.black ? `${white} ${move.black}` : white;
+    }).join(' ');
+}
 
-    const comments = getCommentsFromPGN(pgn);
-
-    const moves = movesToArray(history);
-
-    let indexes: string[] = []
-    let whiteMoves: string[] = []
-    let blackMoves: string[] = []
-    for (let i = 0; i < moves.length; i++) {
-        indexes.push(moves[i].move)
-        whiteMoves.push(moves[i].white)
-        blackMoves.push(moves[i].black || '')
-    }
+function VariantLine({ moves, depth, isLast }: { moves: MoveArray; depth: number; isLast: boolean }) {
+    const prefix = isLast ? '└──' : '├──';
+    const subVariants = moves.flatMap((move, mi) =>
+        (move.childMoves ?? []).map((childVariant, ci, arr) => ({
+            variant: childVariant,
+            isLast: ci === arr.length - 1,
+            key: `${mi}-${ci}`,
+        }))
+    );
 
     return (
-        <div className="flex flex-row space-x-2 text-md">
-            <div>
-                {indexes.map((e: string, i: number) => (
-                    <div key={i}>
-                        <span>{e}.</span>
-                    </div>
-                ))}
+        <div>
+            <div style={{ paddingLeft: `${depth * 30}px` }} className="flex items-center gap-1">
+                <span>{prefix}</span>
+                <span>{formatVariantMoves(moves)}</span>
             </div>
-            <div>
-                {whiteMoves.map((move: string, i: number) => (
-                    <div
-                        key={i}
-                        className={currentMoveIndex === i * 2 ? 'bg-accent/40 rounded-md px-1' : 'px-1'}
-                    >
-                        <span>{move}</span>
+            {subVariants.map(({ variant, isLast: subIsLast, key }) => (
+                <VariantLine key={key} moves={variant} depth={depth + 1} isLast={subIsLast} />
+            ))}
+        </div>
+    );
+}
+
+export default function DisplayMoves({
+    currentMoveIndex,
+    showAnnotations,
+    showSidelines,
+    pgn,
+}: {
+    currentMoveIndex: number;
+    showAnnotations?: boolean;
+    showSidelines?: boolean;
+    pgn: string;
+}) {
+    const { moves } = parsePgn(pgn);
+
+    return (
+        <div className="text-md">
+            {moves.map((move, i) => (
+                <div key={i}>
+                    <div className="flex items-center gap-1">
+                        <span className="text-muted-foreground">{move.moveIndex}.</span>
+                        {move.white && (
+                            <span className={currentMoveIndex === i * 2 ? 'bg-accent/40 rounded-md px-1' : 'px-1'}>
+                                {move.white}
+                            </span>
+                        )}
+                        {move.black && (
+                            <span className={currentMoveIndex === i * 2 + 1 ? 'bg-accent/40 rounded-md px-1' : 'px-1'}>
+                                {move.black}
+                            </span>
+                        )}
+                        {showAnnotations && move.comment && (
+                            <span className="italic text-secondary text-sm">{move.comment}</span>
+                        )}
                     </div>
-                ))}
-            </div>
-            <div>
-                {blackMoves.map((move: string, i: number) => (
-                    <div
-                        key={i}
-                        className={currentMoveIndex === i * 2 + 1 ? 'bg-accent/40 rounded-md px-1' : 'px-1'}
-                    >
-                        <span>{move}</span>
-                    </div>
-                ))}
-            </div>
-            {showAnnotations ? (
-                <div>
-                    {indexes.map((e: string, i: number) => (
-                        <div key={i}>
-                            {comments[parseInt(e)] ?
-                                <span className='italic text-secondary'>{comments[parseInt(e)]}</span> :
-                                <span>&#8203;</span>}
-                        </div>
+                    {showSidelines && move.childMoves?.map((variant, j, arr) => (
+                        <VariantLine key={j} moves={variant} depth={1} isLast={j === arr.length - 1} />
                     ))}
                 </div>
-            ) : null}
+            ))}
         </div>
-    )
+    );
 }
