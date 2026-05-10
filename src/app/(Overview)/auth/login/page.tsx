@@ -13,7 +13,7 @@ export default function Login() {
 
     return (
         <div className="h-screen text-text-dark flex items-center justify-center">
-            <form action={formAction} className="w-1/5 space-y-3">
+            <form action={formAction} className="w-1/4 space-y-3">
                 <div className="flex flex-col rounded-lg bg-primary py-8 px-5 gap-5">
                     <h1 className="flex flex-col items-center text-2xl">
                         Sign in
@@ -55,11 +55,11 @@ export default function Login() {
                     </div>
                     <input type="hidden" name="redirectTo" value={"/dashboard"} />
                     <div className="flex flex-col justify-center items-center">
-                        <div className="flex flex-row justify-between w-full">
+                        <div className="flex flex-row justify-between w-full pb-5">
                             <Button className="bg-accent" aria-disabled={isPending}>
                                 Log in
                             </Button>
-                            <Link className="flex items-center px-4" href={"/auth/register"}>
+                            <Link className="flex items-center" href={"/auth/register"}>
                                 <Button className="bg-accent">
                                     create account
                                 </Button>

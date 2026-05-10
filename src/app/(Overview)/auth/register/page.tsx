@@ -33,7 +33,7 @@ export default function RegisterPage() {
 
     return (
         <div className="h-screen flex items-center justify-center text-text-dark">
-            <form onSubmit={handleSubmit} className="w-1/5 space-y-3">
+            <form onSubmit={handleSubmit} className="w-1/4 space-y-3">
                 <div className="flex flex-col rounded-lg bg-primary py-8 px-5 gap-5">
                     <h1 className="flex flex-col items-center text-2xl">
                         Create account
@@ -119,7 +119,7 @@ export default function RegisterPage() {
                             aria-atomic="true">
                             {error && (
                                 <>
-                                    <p className="text-m italic text-error">{error}</p>
+                                    <p className="text-m text-error">{error}</p>
                                 </>
                             )}
                         </div>
